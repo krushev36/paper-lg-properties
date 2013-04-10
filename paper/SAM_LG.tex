@@ -636,9 +636,9 @@ $F_{\text{mgr}}$ is settled to $0.2,0.3$ and $0.4$.
   
 To test wheter the values of the above metioned models are physically
 reliable, we constructed the Tully-Fischer and Color-Magnitude
-relations of the mock catalogues. To build the Tully-Fischer relation
-we used the maximum velocity of the disc component of the discs
-galaxies ($M_{\text{Bulge}}/M_{\text{Total}}\le 0.3$). 
+relations of the mock catalogues. This is decribed in the Appendix. 
+
+
 
 
 \subsection{Searching LG-type Galaxies}
@@ -735,53 +735,6 @@ between the LG modeled pairs and the observed M31 and MW.
 \section{Results and Discusion}
 \label{sec:results}
 
-
-\subsection{Testing Models}
-\label{sec:calibration}
-
-\begin{figure}
-\centering
- \includegraphics[scale=0.68]{figures/tests/T_F-disk-velmax.pdf}
-\caption{ Tully fischer relation. The magnitudes where calculated
-  without dust extintion and the parameters of the models can be seen
-  at Table \ref{tab:runs}  as R1, R2 and R3. The error bars correspond
-  to the results of \citet{2007AJ....134..945P}.\label{fig:T-F-diagram}} 
-\end{figure}
-\begin{figure}
-\centering
- \includegraphics[scale=0.68]{figures/tests/Color_Mag.pdf}
-\caption{ Color magnitud relation. Magnitudes were calculated without
-  extintion. This is the reference simulation presented in table
-  \ref{tab:runs}  as R1, R2 and R3. The shaded region correspond to a
-  scatter of  $2\sigma$ from the work  of
-  \citet{2012MNRAS.423.1583M}.\label{fig:CM-diagram}} 
-\end{figure}
-
-We calculated the Tully-Fisher and Color-Magnitude relations for each
-of the models in Table \ref{tab:runs}.  To build the Tully-Fisher
-relation, we proceded selecting the maximum velocity between the
-bulge and disk components of disk galaxies, and defined disks as
-galaxies  with a bulge-to-total mass ratio
-$M_{\text{bulge}}/M_{\text{tot}}\le 0.3$.  
-
-In Figure \ref{fig:T-F-diagram} are shown de scatters of the maximum
-velocity  between the first and thirth quartils  as a function of
-magnitude in  the i-band without dust extintion of the data of the
-three benchmarks R1, R2 and R3 compared to the data of the SDSS
-\citep{2007AJ....134..945P}. It can be seen the resulting Tully-Fisher
-relations of each of the benchmarks reproduce accurately the one of
-the SDSS. In general none of the calculated Tully-Fisher relations of
-any of the simulated models deviate significantly from ones shown in
-\ref{fig:T-F-diagram}. We have also calculated the Color-Magnitude
-diagrams without dust extintion of the three mentioned benchmarks. In
-Figure \ref{fig:CM-diagram}, the scatter of the color between the
-first and thirth quartils and the medians as a function of the r-band
-reproduce accurately the estimated Color-Magnitude relation of the
-SDSS \citep{2012MNRAS.423.1583M}. Again, in general, all the other
-simulated models of the calculated medians does not deviate
-significantly from the estimations of the best fit of the mean of the
-SDSS and remains inside of the $3\sigma$ estimated deviation of the
-Color-Magnitude relation. 
 
 
 \subsection{Baryonic Properties}
@@ -1032,9 +985,57 @@ have a similar behavior as the values of the parameters are changed.
 
 
 
-\section{Appendix}
-\label{sec:appendix}
+\section{Appendix: Testing the results from Galacticus}
+\label{sec:calibration}
 
+To build the Tully-Fischer relation we used the maximum velocity of
+the disc component of the discs galaxies
+($M_{\text{Bulge}}/M_{\text{Total}}\le 0.3$).  
+
+
+\begin{figure}
+\centering
+ \includegraphics[scale=0.68]{figures/tests/T_F-disk-velmax.pdf}
+\caption{ Tully fischer relation. The magnitudes where calculated
+  without dust extintion and the parameters of the models can be seen
+  at Table \ref{tab:runs}  as R1, R2 and R3. The error bars correspond
+  to the results of \citet{2007AJ....134..945P}.\label{fig:T-F-diagram}} 
+\end{figure}
+\begin{figure}
+\centering
+ \includegraphics[scale=0.68]{figures/tests/Color_Mag.pdf}
+\caption{ Color magnitud relation. Magnitudes were calculated without
+  extintion. This is the reference simulation presented in table
+  \ref{tab:runs}  as R1, R2 and R3. The shaded region correspond to a
+  scatter of  $2\sigma$ from the work  of
+  \citet{2012MNRAS.423.1583M}.\label{fig:CM-diagram}} 
+\end{figure}
+
+We calculated the Tully-Fisher and Color-Magnitude relations for each
+of the models in Table \ref{tab:runs}.  To build the Tully-Fisher
+relation, we proceded selecting the maximum velocity between the
+bulge and disk components of disk galaxies, and defined disks as
+galaxies  with a bulge-to-total mass ratio
+$M_{\text{bulge}}/M_{\text{tot}}\le 0.3$.  
+
+In Figure \ref{fig:T-F-diagram} are shown de scatters of the maximum
+velocity  between the first and thirth quartils  as a function of
+magnitude in  the i-band without dust extintion of the data of the
+three benchmarks R1, R2 and R3 compared to the data of the SDSS
+\citep{2007AJ....134..945P}. It can be seen the resulting Tully-Fisher
+relations of each of the benchmarks reproduce accurately the one of
+the SDSS. In general none of the calculated Tully-Fisher relations of
+any of the simulated models deviate significantly from ones shown in
+\ref{fig:T-F-diagram}. We have also calculated the Color-Magnitude
+diagrams without dust extintion of the three mentioned benchmarks. In
+Figure \ref{fig:CM-diagram}, the scatter of the color between the
+first and thirth quartils and the medians as a function of the r-band
+reproduce accurately the estimated Color-Magnitude relation of the
+SDSS \citep{2012MNRAS.423.1583M}. Again, in general, all the other
+simulated models of the calculated medians does not deviate
+significantly from the estimations of the best fit of the mean of the
+SDSS and remains inside of the $3\sigma$ estimated deviation of the
+Color-Magnitude relation. 
 
 
 
