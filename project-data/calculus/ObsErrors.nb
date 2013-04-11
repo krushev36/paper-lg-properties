@@ -1,0 +1,504 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     17542,        495]
+NotebookOptionsPosition[     16646,        461]
+NotebookOutlinePosition[     16987,        476]
+CellTagsIndexPosition[     16944,        473]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ErrorProd", "[", 
+    RowBox[{"x_", ",", "\[Delta]x_", ",", "y_", ",", "\[Delta]y_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"x", "*", "y"}], ")"}], 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"x", "/", "\[Delta]x"}], ")"}], "^", "2"}], "+", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"y", "/", "\[Delta]y"}], ")"}], "^", "2"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ErrorDiv", "[", 
+     RowBox[{"x_", ",", "\[Delta]x_", ",", "y_", ",", "\[Delta]y_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"x", "/", "y"}], ")"}], 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "/", "\[Delta]x"}], ")"}], "^", "2"}], "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"y", "/", "\[Delta]y"}], ")"}], "^", "2"}]}], "]"}]}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MWDM", "=", 
+   RowBox[{"1.95", "*", 
+    SuperscriptBox["10", "12"]}]}], ";", 
+  RowBox[{"MWDMError", "=", 
+   RowBox[{"0.75", "*", 
+    SuperscriptBox["10", "12"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MWDisk", "=", 
+   RowBox[{"3.9", "*", 
+    SuperscriptBox["10", "10"]}]}], ";", " ", 
+  RowBox[{"MWDiskError", "=", 
+   RowBox[{"0.6", "*", 
+    SuperscriptBox["10", "10"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MWBulge", "=", 
+   RowBox[{"0.85", "*", 
+    SuperscriptBox["10", "10"]}]}], ";", " ", 
+  RowBox[{"MWBulgeError", "=", 
+   RowBox[{"0.35", "*", 
+    SuperscriptBox["10", "10"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"MWGas", "=", 
+    RowBox[{"7.0", "*", 
+     SuperscriptBox["10", "9"]}]}], ";", " ", 
+   RowBox[{"MWGasError", "=", 
+    RowBox[{"1.0", "*", 
+     SuperscriptBox["10", "9"]}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"MW", " ", "stellar"}], "-", "to", "-", 
+    RowBox[{"total", " ", "mass", " ", "relation"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<the minimum MW stellar-to-stellar mass is: \>\"", ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"MWDisk", "-", "MWDiskError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"MWBulge", "-", "MWBulgeError"}], ")"}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{"MWDM", "+", "MWDMError"}], ")"}]}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<the maximum MW stellar-to-stellar mass is: \>\"", ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"MWDisk", "+", "MWDiskError"}], ")"}], "+", 
+       RowBox[{"(", 
+        RowBox[{"MWBulge", "+", "MWBulgeError"}], ")"}]}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{"MWDM", "-", "MWDMError"}], ")"}]}]}], "]"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"MW", " ", "gas", " ", "fraction"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<the minimum MW gas fraction is: \>\"", ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"MWGas", "-", "MWGasError"}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"MWDisk", "+", "MWDiskError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"MWBulge", "+", "MWBulgeError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"MWGas", "+", "MWGasError"}], ")"}]}], ")"}]}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<the maximum MW gas fraction is: \>\"", ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"MWGas", "+", "MWGasError"}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"MWDisk", "-", "MWDiskError"}], ")"}], "+", 
+       RowBox[{"(", 
+        RowBox[{"MWBulge", "-", "MWBulgeError"}], ")"}], "+", 
+       RowBox[{"(", 
+        RowBox[{"MWGas", "-", "MWGasError"}], ")"}]}], ")"}]}]}], "]"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"MW", " ", "bulge", " ", "fraction"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<the minimum MW bulge fraction is: \>\"", ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"MWBulge", "-", "MWBulgeError"}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"MWDisk", "+", "MWDiskError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"MWBulge", "+", "MWBulgeError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"MWGas", "+", "MWGasError"}], ")"}]}], ")"}]}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<the maximum MW bulge fraction is: \>\"", ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"MWBulge", "+", "MWBulgeError"}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"MWDisk", "-", "MWDiskError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"MWBulge", "-", "MWBulgeError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"MWGas", "-", "MWGasError"}], ")"}]}], ")"}]}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.5609605136097517`*^9, 3.56096053279839*^9}, 
+   3.56096059669559*^9, {3.560960663133337*^9, 3.560960703802421*^9}, {
+   3.560960762643837*^9, 3.560960853888673*^9}, {3.560960939544382*^9, 
+   3.560960940557314*^9}, {3.560960973861092*^9, 3.5609609749324617`*^9}, {
+   3.560961169531076*^9, 3.56096125584867*^9}, {3.560961361149822*^9, 
+   3.560961712101282*^9}, {3.560961819225113*^9, 3.56096189933305*^9}, {
+   3.560961936596417*^9, 3.560962042701466*^9}, {3.560962074427947*^9, 
+   3.560962092629159*^9}, {3.560962124294938*^9, 3.560962171845481*^9}, 
+   3.561032233912538*^9, {3.561032350373701*^9, 3.5610323614836073`*^9}, {
+   3.56103241696133*^9, 3.561032594673191*^9}, {3.56103412634509*^9, 
+   3.5610341401223927`*^9}, {3.561034215340704*^9, 3.561034295354938*^9}, {
+   3.56103443224148*^9, 3.561034560310668*^9}, {3.561034602578085*^9, 
+   3.561034607507051*^9}, {3.5610347818703136`*^9, 3.5610348387400427`*^9}, 
+   3.561034941404887*^9, {3.561034973164854*^9, 3.5610350461315947`*^9}, {
+   3.561036159887804*^9, 3.561036251780272*^9}, {3.5610363020260487`*^9, 
+   3.561036377072585*^9}, {3.561036639287768*^9, 3.561036837097918*^9}, {
+   3.561036898637933*^9, 3.56103701299249*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the minimum MW stellar-to-stellar mass is: \"\>", 
+   "\[InvisibleSpace]", "0.014074074074074074`"}],
+  SequenceForm[
+  "the minimum MW stellar-to-stellar mass is: ", 0.014074074074074074`],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.561032478469872*^9, 3.5610325960690193`*^9, {3.561034128295188*^9, 
+   3.561034141526071*^9}, {3.561034279507169*^9, 3.5610342959995413`*^9}, {
+   3.561034536895711*^9, 3.561034561469263*^9}, 3.5610348411240387`*^9, {
+   3.5610350278384*^9, 3.56103504958521*^9}, 3.5610368388494253`*^9, 
+   3.561036927767437*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the maximum MW stellar-to-stellar mass is: \"\>", 
+   "\[InvisibleSpace]", "0.0475`"}],
+  SequenceForm["the maximum MW stellar-to-stellar mass is: ", 0.0475],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.561032478469872*^9, 3.5610325960690193`*^9, {3.561034128295188*^9, 
+   3.561034141526071*^9}, {3.561034279507169*^9, 3.5610342959995413`*^9}, {
+   3.561034536895711*^9, 3.561034561469263*^9}, 3.5610348411240387`*^9, {
+   3.5610350278384*^9, 3.56103504958521*^9}, 3.5610368388494253`*^9, 
+   3.561036927776472*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the minimum MW gas fraction is: \"\>", "\[InvisibleSpace]", 
+   "0.09230769230769231`"}],
+  SequenceForm["the minimum MW gas fraction is: ", 0.09230769230769231],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.561032478469872*^9, 3.5610325960690193`*^9, {3.561034128295188*^9, 
+   3.561034141526071*^9}, {3.561034279507169*^9, 3.5610342959995413`*^9}, {
+   3.561034536895711*^9, 3.561034561469263*^9}, 3.5610348411240387`*^9, {
+   3.5610350278384*^9, 3.56103504958521*^9}, 3.5610368388494253`*^9, 
+   3.56103692777881*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the maximum MW gas fraction is: \"\>", "\[InvisibleSpace]", 
+   "0.18181818181818182`"}],
+  SequenceForm["the maximum MW gas fraction is: ", 0.18181818181818182`],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.561032478469872*^9, 3.5610325960690193`*^9, {3.561034128295188*^9, 
+   3.561034141526071*^9}, {3.561034279507169*^9, 3.5610342959995413`*^9}, {
+   3.561034536895711*^9, 3.561034561469263*^9}, 3.5610348411240387`*^9, {
+   3.5610350278384*^9, 3.56103504958521*^9}, 3.5610368388494253`*^9, 
+   3.561036927870349*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the minimum MW bulge fraction is: \"\>", "\[InvisibleSpace]", 
+   "0.07692307692307693`"}],
+  SequenceForm["the minimum MW bulge fraction is: ", 0.07692307692307693],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.561032478469872*^9, 3.5610325960690193`*^9, {3.561034128295188*^9, 
+   3.561034141526071*^9}, {3.561034279507169*^9, 3.5610342959995413`*^9}, {
+   3.561034536895711*^9, 3.561034561469263*^9}, 3.5610348411240387`*^9, {
+   3.5610350278384*^9, 3.56103504958521*^9}, 3.5610368388494253`*^9, 
+   3.561036928021163*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the maximum MW bulge fraction is: \"\>", "\[InvisibleSpace]", 
+   "0.2727272727272727`"}],
+  SequenceForm["the maximum MW bulge fraction is: ", 0.2727272727272727],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.561032478469872*^9, 3.5610325960690193`*^9, {3.561034128295188*^9, 
+   3.561034141526071*^9}, {3.561034279507169*^9, 3.5610342959995413`*^9}, {
+   3.561034536895711*^9, 3.561034561469263*^9}, 3.5610348411240387`*^9, {
+   3.5610350278384*^9, 3.56103504958521*^9}, 3.5610368388494253`*^9, 
+   3.5610369282795973`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"M31DM", "=", 
+   RowBox[{"1.45", "*", 
+    SuperscriptBox["10", "12"]}]}], ";", 
+  RowBox[{"M31DMError", "=", 
+   RowBox[{"0.15", "*", 
+    SuperscriptBox["10", "12"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"M31Disk", "=", 
+   RowBox[{"8.5", "*", 
+    SuperscriptBox["10", "10"]}]}], ";", " ", 
+  RowBox[{"M31DiskError", "=", 
+   RowBox[{"1.5", "*", 
+    SuperscriptBox["10", "10"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"M31Bulge", "=", 
+   RowBox[{"2.6", "*", 
+    SuperscriptBox["10", "10"]}]}], ";", " ", 
+  RowBox[{"M31BulgeError", "=", 
+   RowBox[{"0.7", "*", 
+    SuperscriptBox["10", "10"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"M31Gas", "=", 
+    RowBox[{"5.5", "*", 
+     SuperscriptBox["10", "9"]}]}], ";", " ", 
+   RowBox[{"M31GasError", "=", 
+    RowBox[{"0.5", "*", 
+     SuperscriptBox["10", "9"]}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"M31", " ", "stellar"}], "-", "to", "-", 
+    RowBox[{"total", " ", "mass", " ", "relation"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<the minimum M31 stellar-to-stellar mass is: \>\"", ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"M31Disk", "-", "M31DiskError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"M31Bulge", "-", "M31BulgeError"}], ")"}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{"M31DM", "+", "M31DMError"}], ")"}]}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<the maximum M31 stellar-to-stellar mass is: \>\"", ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"M31Disk", "+", "M31DiskError"}], ")"}], "+", 
+       RowBox[{"(", 
+        RowBox[{"M31Bulge", "+", "M31BulgeError"}], ")"}]}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{"M31DM", "-", "M31DMError"}], ")"}]}]}], "]"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"M31", " ", "gas", " ", "fraction"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<the minimum M31 gas fraction is: \>\"", ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"M31Gas", "-", "M31GasError"}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"M31Disk", "+", "M31DiskError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"M31Bulge", "+", "M31BulgeError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"M31Gas", "+", "M31GasError"}], ")"}]}], ")"}]}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<the maximum M31 gas fraction is: \>\"", ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"M31Gas", "+", "M31GasError"}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"M31Disk", "-", "M31DiskError"}], ")"}], "+", 
+       RowBox[{"(", 
+        RowBox[{"M31Bulge", "-", "M31BulgeError"}], ")"}], "+", 
+       RowBox[{"(", 
+        RowBox[{"M31Gas", "-", "M31GasError"}], ")"}]}], ")"}]}]}], "]"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"M31", " ", "bulge", " ", "fraction"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<the minimum M31 bulge fraction is: \>\"", ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"M31Bulge", "-", "M31BulgeError"}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"M31Disk", "+", "M31DiskError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"M31Bulge", "+", "M31BulgeError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"M31Gas", "+", "M31GasError"}], ")"}]}], ")"}]}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<the maximum M31 bulge fraction is: \>\"", ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"M31Bulge", "+", "M31BulgeError"}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"M31Disk", "-", "M31DiskError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"M31Bulge", "-", "M31BulgeError"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"M31Gas", "-", "M31GasError"}], ")"}]}], ")"}]}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.561037018351715*^9, 3.561037088586132*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the minimum M31 stellar-to-stellar mass is: \"\>", 
+   "\[InvisibleSpace]", "0.055624999999999994`"}],
+  SequenceForm[
+  "the minimum M31 stellar-to-stellar mass is: ", 0.055624999999999994`],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.561037097088974*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the maximum M31 stellar-to-stellar mass is: \"\>", 
+   "\[InvisibleSpace]", "0.10230769230769231`"}],
+  SequenceForm[
+  "the maximum M31 stellar-to-stellar mass is: ", 0.10230769230769231`],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.561037097204126*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the minimum M31 gas fraction is: \"\>", "\[InvisibleSpace]", 
+   "0.03597122302158273`"}],
+  SequenceForm["the minimum M31 gas fraction is: ", 0.03597122302158273],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.561037097330844*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the maximum M31 gas fraction is: \"\>", "\[InvisibleSpace]", 
+   "0.06382978723404255`"}],
+  SequenceForm["the maximum M31 gas fraction is: ", 0.06382978723404255],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.561037097390926*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the minimum M31 bulge fraction is: \"\>", "\[InvisibleSpace]", 
+   "0.1366906474820144`"}],
+  SequenceForm["the minimum M31 bulge fraction is: ", 0.1366906474820144],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.5610370975550222`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"the maximum M31 bulge fraction is: \"\>", "\[InvisibleSpace]", 
+   "0.35106382978723405`"}],
+  SequenceForm["the maximum M31 bulge fraction is: ", 0.35106382978723405`],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.561037097626473*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1140, 623},
+WindowMargins->{{Automatic, -181}, {-23, Automatic}},
+FrontEndVersion->"7.0 for Linux x86 (64-bit) (February 25, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 6392, 173, 473, "Input"],
+Cell[CellGroupData[{
+Cell[6984, 199, 607, 12, 24, "Print"],
+Cell[7594, 213, 575, 11, 24, "Print"],
+Cell[8172, 226, 578, 11, 24, "Print"],
+Cell[8753, 239, 580, 11, 24, "Print"],
+Cell[9336, 252, 583, 11, 24, "Print"],
+Cell[9922, 265, 583, 11, 24, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10554, 282, 4251, 123, 429, "Input"],
+Cell[CellGroupData[{
+Cell[14830, 409, 313, 7, 24, "Print"],
+Cell[15146, 418, 311, 7, 24, "Print"],
+Cell[15460, 427, 285, 6, 24, "Print"],
+Cell[15748, 435, 285, 6, 24, "Print"],
+Cell[16036, 443, 289, 6, 24, "Print"],
+Cell[16328, 451, 290, 6, 24, "Print"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

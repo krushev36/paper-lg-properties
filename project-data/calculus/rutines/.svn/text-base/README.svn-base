@@ -1,0 +1,5 @@
+svn list --verbose file:///z/ssanes/.svn/repo/project_1/trunk/RUTINES
+svn import project_1 file:///z/ssanes/.svn/repo/project_1 -m "reload of rutines"
+svn add file
+svn update
+
