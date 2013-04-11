@@ -1,0 +1,78 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            Clues Trees HDF5 Builder
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Copyright 2010:
+          Developed by Sergio Sanes Negrete MSc. student at 
+	  Universidad de Antioquia. Medellin, Colombia.
+
+e-mail:
+	krushev36@gmail.com
+
+Code on developement. Designed to load  a pack of mergers t
+rees and store'em in the HDF5 format required by Galacticus
+ v0.0.1 (can be used also in Galacticus v0.9).
+
+Base code: 
+     	   Ansi C
+Requirements:
+	  HDF5 Command Line Tools 
+          Above can be installed under Debian based systems
+	  with  "apt-get install hdf5tools"
+	  HDFView (Optional)
+	  Above can be installed by "apt-get install hdfvie
+	  w"
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  *Edit
+  Edit BuildTreePack.sh script variables PATH_LOCAL_IN 
+  and FILE_OUT according your preferences.
+
+  PATH_LOCAL_IN is the directory where the script will load
+  the *.dat merger tree files
+
+  FILE_OUT  is the output file that will contain the set of
+  input merger trees
+
+  *Run:
+       ./BuildTreePack.sh 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  *How
+  MergerTreeCleanBad.c make identifies short merger trees,
+  ignoring these to the output.
+  **Run:
+       ./MergerTreeCleanBad.out (char *)file_input
+
+  MergerTreeHDF5.c code reads (complete) merger tree hist-
+  ories extract  ed from a merger trees catalogue. Builds 
+  the merger tree  HDF5 structure requiered by Galacticus
+  Code (Benson 2009). 
+  If interested in building HDF5 merger trees between diff
+  erent initial and final snapshots than provided by sourc
+  e merger tree, these can be setted via command line by p
+  assing
+
+  $export initLevel (int)init
+  $export endLevel (int)end
+  
+  Where init_snap is the array counter number of the level
+  or snpashot of interest, it means 
+  snpashot[init] = init_snap
+  snpashot[end] = end_snap.
+
+
+  **Run:
+        ./MergerTreeHDF5.out (char *)imput_tree \
+                       (char *)output_tree (int)tree_number
+  **Example:
+	./BuildTreePack.sh
+
+
+  *Note:
+  This code do not make association to sibling nodes. Each
+  sibling node ID stored is setted to -1.
+  remove environment variables using "unset" command.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
