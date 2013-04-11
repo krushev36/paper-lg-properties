@@ -1,0 +1,177 @@
+#!/usr/bin/gnuplot
+
+
+#beta=0.7817;      gamma=0.7334;      M1s=10**12.1988;      ms0_M0=0.0186
+mc(x, beta, gamma, M1s, ms0_M0)=2.0*x*(ms0_M0)*( (x/M1s)**(-beta)  +  (x/M1s)**(gamma) )**(-1)
+mc2(x, beta, gamma, M1s, ms0_M0) = 2.0*(10**x)*(ms0_M0)*( (10**x/10**M1s)**(-beta)  +  (10**x/10**M1s)**(gamma) )**(-1)
+mc3(x, beta, gamma, M1s, ms0_M0) = 2.0*(ms0_M0)*( (10**x/10**M1s)**(-beta)  +  (10**x/10**M1s)**(gamma) )**(-1)
+
+#error
+DIV_ERROR(x,dx,y,dy)=x*(dx/x+dy/y)/y
+
+
+Mean(M) = -0.0772557*M - 0.88334
+s(M) = 0.0059*M + 0.2632
+
+
+################################   PART 1 - VARIABLE PARAMETERS ########################################## 
+
+
+# ##Tully Fisher para galaxias centrales 
+
+# # reset
+# # set border  lw 3
+# # set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+# # set output "plots/0.0.1-run-v1/10909/T_F-central-veldisk.pdf"
+# # set key font "Times-New-Roman"
+# # set xlabel "log_{/*0.75 10} V_{disk}"
+# # set ylabel "i_{/*.75 (z=0.1)}"
+# # set style fill transparent solid 0.6 noborder
+# # plot [1.4:2.6][-24:-18]  "./analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-derivedProps-z0.1.dat" u (log10($2)):($10==0?$6:1/0) notitle ps 0.5 w p, "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 2.15 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars 
+
+
+
+# # reset
+# # set border  lw 3
+# # set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+# # set output "plots/0.0.1-run-v1/10909/T_F-central-velbulge.pdf"
+# # set key font "Times-New-Roman"
+# # set xlabel "log_{/*0.75 10} V_{/*0.75 bulge}"
+# # set ylabel "i_{/*.75 (z=0.1)}"
+# # set style fill transparent solid 0.6 noborder
+# # plot [1.4:2.6][-24:-18]  "./analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-derivedProps-z0.1.dat" u (log10($3)):($10==0?$6:1/0) notitle ps 0.5 w p, "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 2.15 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars 
+
+
+
+# # reset
+# # set border  lw 3
+# # set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+# # set output "plots/0.0.1-run-v1/10909/T_F-central-disk-veldisk.pdf"
+# # set key font "Times-New-Roman"
+# # set xlabel "log_{/*0.75 10} V_{/*0.75 disk}"
+# # set ylabel "i_{/*.75 (z=0.1)}"
+# # set style fill transparent solid 0.6 noborder
+# # plot [1.4:2.6][-24:-18]  "./analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-derivedProps-z0.1.dat" u (log10($2)):(($10==0) & ($9<0.3) ?$6:1/0) notitle ps 0.5 w p, "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 2.15 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars 
+
+
+# # reset
+# # set border  lw 3
+# # set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+# # set output "plots/0.0.1-run-v1/10909/T_F-central-disk-veldisk.pdf"
+# # set key font "Times-New-Roman"
+# # set xlabel "log_{/*0.75 10} V_{/*0.75 bulge}"
+# # set ylabel "i_{/*.75 (z=0.1)}"
+# # set style fill transparent solid 0.6 noborder
+# # plot [1.4:2.6][-24:-18]  "./analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-derivedProps-z0.1.dat" u (log10($3)):(($10==0) & ($9<0.3) ?$6:1/0) notitle ps 0.5 w p, "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 2.15 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars 
+
+
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+# set output "plots/0.0.1-run-v1/10909/Vdisk-StellarMass.pdf"
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 disk}"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.6 noborder
+# plot [1.7:2.5][8.5:11.5]  "./analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-props-z0.005.dat" u (log10($7)):(log10($3+$5)) notitle ps 0.5 w p
+
+
+# #, "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 2.15 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars 
+
+
+
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+# set output "plots/0.0.1-run-v1/10909/T_F-central-disk-velmax.pdf"
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+# set ylabel "i_{/*.75 (z=0.1)}"
+# set style fill transparent solid 0.6 noborder
+# plot [1.4:2.6][-24:-18]  "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 2.15 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars\
+# ,"./analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-tully-fisher-z0.1.dat" u ($6>$7?log10($6):log10($7)):( $3/($2+$3)<0.3 ?-2.5*log10($4+$5):1/0) notitle lc rgb "red" ps 1 w p\
+ 
+
+# #plot [1.4:2.6][-24:-18]  "./analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-tully-fisher-z0.1.dat" u ($5>$6?log10($5):log10($6)):(-2.5*log10($3+$4)) notitle ps 0.5 w p\
+
+
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+set output "plots/0.0.1-run-v1/tot/H_R.pdf"
+set key font "Times-New-Roman"
+set ylabel "g-r_{/*.75 (z=0.1)}"
+set xlabel "r_{/*.75 (z=0.1)}"
+set style fill transparent solid 0.4 noborder
+plot [-24:-17][-0.2:1.5] "+"  u 1:(Mean($1)+3.0*s($1)):(Mean($1)-3.0*s($1)) notitle lw 2 lc rgb "black" lt 1 w filledcurve\
+, "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-luminosity-z0.1.dat" u (-2.5*log10($4+$8)):(-2.5*log10($2+$6)+2.5*log10($4+$8)) notitle ps 0.5 lc rgb "red"  w p\
+, Mean(x) notitle  lt 2 lw 2 lc rgb "black"  w l
+
+
+# #"./analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-luminosity-z0.1.dat" u ($10==0 ?$4:1/0):($5-$4) notitle ps 0.5 lc rgb "red" w p
+
+# ##Halo Mass vs. Stellar Mass v2
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+# set output "plots/0.0.1-run-v1/10909/10909-0.0.1-run-v1-massRange-scat.pdf"
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+# set style fill transparent solid 0.6 noborder
+# plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "\
+# Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+#  , "analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-props-z0.005.dat" u (log10($2)):(log10(($3+$5)/$2)):(0.015) notitle ps 0.25  pt 1 lc rgb "#6666ff" w circ fs transparent solid 0.3\
+#  , "reference/milky-way-v2.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "MW" lc rgb "black" ps 0  pt 4 lw 3 lt 1 w xyerrorbars\
+#  , "reference/m-31.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "M31" lc rgb "black" ps 0  pt 4 lw 3 lt 5 w xyerrorbars
+
+
+
+
+# # #Halo Mass vs. Stellar Mass v3
+# # reset
+# # set border  lw 3
+# # set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+# # set output "plots/0.0.1-run-v1/10909/10909-0.0.1-run-v1-massRange-stats.pdf"
+# # set key font "Times-New-Roman"
+# # set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+# # set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+# # set style fill transparent solid 0.6 noborder
+# # plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "\
+# # Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+# #  , "analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-statistics.dat" u 1:2:4 notitle lt 1 lc rgb "#9999ff" w filledcurves\
+# #  , "analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-statistics.dat" u 1:3 notitle lw 3 lt 1 lc rgb "#3333cc" w l\
+# #  , "reference/milky-way-v2.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "MW" lc rgb "black" ps 0  pt 4 lw 3 lt 1 w xyerrorbars\
+# #  , "reference/m-31.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "M31" lc rgb "black" ps 0  pt 4 lw 3 lt 5 w xyerrorbars
+
+
+
+# ##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass)                                                                                                                                               
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced  color font "Times-New-Roman,9"
+# set key font "Times-New-Roman"
+# set output "plots/0.0.1-run-v1/10909/10909-0.0.1-run-v1-stellarMass-gasFrac.pdf"
+# set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.3 noborder
+# plot [9.5:][-0.02:]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) t "Bell et al. 2003"  ps 0\
+# .5 pt 1 lc rgb "gray"\
+# , "analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-props-z0.005.dat" u (log10($3+$5)):(($4+$6)/($3 + $4 + $5 + $6)):(0.01) t "0.0.1-run-v1" ps 0.5 pt 3 lc rgb "#6666ff" w circles\
+# , "reference/milky-way.dat" u (log10($2)):($8/($2 + $8)) t "MW" lc rgb "black" lw 3 pt 6 ps 0.9 w p\
+# , "reference/m-31.dat" u (log10($2)):($8/($2 + $8)) t "M31" lc rgb "black" lw 3 pt 4 ps 0.9 w p
+
+
+# ##Stellar Mass vs. Bulge  Mass/(Bulge Mass + Disk Mass)
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed color font "Times-New-Roman,9"
+# set key font "Times-New-Roman"
+# set output "plots/0.0.1-run-v1/10909/10909-0.0.1-run-v1-bulgeMassFrac.pdf"
+# set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.25 noborder
+# plot [10:][:1.05]  "analysis/0.0.1-run-v1/10909/10909-0.0.1-run-v1-props-z0.005.dat" u (log10($3+$5)):(($3)/($3 + $4 + $5 + $6)):(0.005) notitle ps 0.8 pt 1 lc rgb "#6666ff" w cir\
+# , "reference/milky-way-v2.dat" u (log10($4)):($7/($4+$10)):(log10($5)):(log10($6)):($8/($6+$10)):($9/($5+$10)) t "MW" lt 1 lw 3 ps 0  pt 4 lc rgb "black" w xyerrorbars\
+# , "reference/m-31.dat" u (log10($4)):($7/($4+$10)):(log10($5)):(log10($6)):($8/($6+$10)):($9/($5+$10)) t "M31" lt 3 lw 3 ps 0  pt 4 lc rgb "black" w xyerrorbars
+

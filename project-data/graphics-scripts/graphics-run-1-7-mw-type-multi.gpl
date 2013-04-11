@@ -1,0 +1,91 @@
+#!/usr/bin/gnuplot
+
+
+#beta=0.7817;      gamma=0.7334;      M1s=10**12.1988;      ms0_M0=0.0186
+mc(x, beta, gamma, M1s, ms0_M0)=2.0*x*(ms0_M0)*( (x/M1s)**(-beta)  +  (x/M1s)**(gamma) )**(-1)
+mc2(x, beta, gamma, M1s, ms0_M0) = 2.0*(10**x)*(ms0_M0)*( (10**x/10**M1s)**(-beta)  +  (10**x/10**M1s)**(gamma) )**(-1)
+mc3(x, beta, gamma, M1s, ms0_M0) = 2.0*(ms0_M0)*( (10**x/10**M1s)**(-beta)  +  (10**x/10**M1s)**(gamma) )**(-1)
+
+#error
+DIV_ERROR(x,dx,y,dy)=x*(dx/x+dy/y)/y
+
+
+Mean(M) = -0.0772557*M - 0.88334
+s(M) = 0.0059*M + 0.2632
+
+
+################################   PART 1 - VARIABLE PARAMETERS ########################################## 
+
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9" size 7in ,9in
+# set output "plots/0.0.1-run-v10/tot/0.0.1-run-10-plots-mw-type-estimarors-pack1.pdf"
+# set title "0.0.1-run-10"
+# set multiplot
+# set size 0.9, 0.35
+# set origin 0.03 , 0.65
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10}M_{/*0.75 DM}"
+# plot [10.5:13][0:5.2] "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-mw-type-estimation-z0.005.dat" u (log10($2)):10 notitle w p , "" u (log10($2)):11 lc rgb "black" notitle w p
+# set origin 0.03 , 0.32
+# set xlabel "log_{/*0.75 10}M_{{/*.75 bulge}, \342\213\206}"
+# plot [6:12][0:5.2] "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-mw-type-estimation-z0.005.dat" u (log10($3)):10 notitle w p , "" u (log10($3)):11 lc rgb "black" notitle w p
+# set origin 0.03 , 0.0
+# set xlabel "log_{/*0.75 10}M_{ disk, \342\213\206}"
+# plot [6:12][0:5.2] "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-mw-type-estimation-z0.005.dat" u (log10($5)):10 notitle w p , "" u (log10($5)):11 lc rgb "black" notitle w p
+# unset multiplot
+
+
+
+
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9" size 7in , 9in
+# set output "plots/0.0.1-run-v10/tot/0.0.1-run-v10-plots-mw-type-estimarors-pack2.pdf"
+# set title "0.0.1-run-v10"
+# set multiplot
+# set size 0.9, 0.35
+# set origin 0.03 , 0.65
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10}M_{/*0.75 disk, gas}"
+# plot [6:10][0:5.2] "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-mw-type-estimation-z0.005.dat" u (log10($6)):10 notitle w p , "" u (log10($6)):11 notitle lc rgb "black" w p
+# set origin 0.03 , 0.32
+# set xlabel "V_{max}"
+# plot [0:600][0:5.2] "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-mw-type-estimation-z0.005.dat" u ($7>$8 ? $7:$8):10 notitle w p , "" u ($7>$8 ? $7:$8):11 notitle lc rgb "black" w p
+# set origin 0.03 , 0.0
+# set xlabel "R_h"
+# plot [0:0.06][:5.2] "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-mw-type-estimation-z0.005.dat" u 9:10 notitle w p , "" u 9:11 notitle lc rgb "black" w p
+# unset multiplot
+
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9" size 7in , 9in
+set output "plots/0.0.1-run-v10/tot/0.0.1-run-v10-chi-squared-histogram.pdf"
+set key font "Times-New-Roman"
+set xlabel "{/Symbol c}^2"
+plot [0:5][:] "analysis/0.0.1-run-v10/tot/chi-squared-histogram.dat" u 1:3 notitle w l
+
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9" size 7in , 9in
+set output "plots/0.0.1-run-v10/tot/0.0.1-run-v10-eta-histogram.pdf"
+set key font "Times-New-Roman"
+set xlabel "{/Symbol h}"
+plot [0:6][:] "analysis/0.0.1-run-v10/tot/eta-histogram.dat" u 1:3 notitle w l
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

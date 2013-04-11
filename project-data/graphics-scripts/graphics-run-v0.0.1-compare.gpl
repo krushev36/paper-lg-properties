@@ -1,0 +1,655 @@
+#!/usr/bin/gnuplot
+
+
+#beta=0.7817;      gamma=0.7334;      M1s=10**12.1988;      ms0_M0=0.0186
+mc(x, beta, gamma, M1s, ms0_M0)=2.0*x*(ms0_M0)*( (x/M1s)**(-beta)  +  (x/M1s)**(gamma) )**(-1)
+mc2(x, beta, gamma, M1s, ms0_M0) = 2.0*(10**x)*(ms0_M0)*( (10**x/10**M1s)**(-beta)  +  (10**x/10**M1s)**(gamma) )**(-1)
+mc3(x, beta, gamma, M1s, ms0_M0) = 2.0*(ms0_M0)*( (10**x/10**M1s)**(-beta)  +  (10**x/10**M1s)**(gamma) )**(-1)
+
+#error
+DIV_ERROR(x,dx,y,dy)=x*(dx/x+dy/y)/y
+
+
+Mean(M) = -0.0772557*M - 0.88334
+s(M) = 0.0059*M + 0.2632
+
+
+
+
+#################################################################################################################################################### 
+
+#Tully Fischer
+reset
+set border  lw 3
+set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,9" size 8.2inch, 11inch
+set output "plots/0.0.1-run-v1-10/run-v1-10-T_F-velmax-magnitude.pdf"
+set multiplot
+set size 1,0.5
+#set rmargin 3
+set origin 0.0, 0.5
+set key font "Times-New-Roman"
+set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+set ylabel "i_{/*.75 (z=0.1)}"
+set style fill transparent solid 0.6 noborder
+plot [1.4:2.6][-24:-18]  "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 4 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars\
+, "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v1"  lt 1 lc rgb "red" lw  5  w l\
+, "analysis/0.0.1-run-v2/tot/0.0.1-run-v2-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v2"  lt 2 lc rgb "gold" lw 5  w l\
+, "analysis/0.0.1-run-v3/tot/0.0.1-run-v3-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v3"  lt 3 lc rgb "#0000FF" lw 5   w l\
+, "analysis/0.0.1-run-v4/tot/0.0.1-run-v4-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v4"  lt 4 lc rgb "#006600" lw 5   w l\
+, "analysis/0.0.1-run-v5/tot/0.0.1-run-v5-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v5"  lt 5 lc rgb "#9900CC" lw 5   w l\
+, "analysis/0.0.1-run-v6/tot/0.0.1-run-v6-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v6"  lt 6 lc rgb "#009999" lw 5   w l\
+, "analysis/0.0.1-run-v7/tot/0.0.1-run-v7-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v7"  lt 7 lc rgb "#FF00CC" lw 5   w l\
+, "analysis/0.0.1-run-v8/tot/0.0.1-run-v8-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v8"  lt 5 lc rgb "#CC6600" lw 5   w l\
+, "analysis/0.0.1-run-v9/tot/0.0.1-run-v9-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v9"  lt 6 lc rgb "#339900" lw 5   w l\
+, "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v10"  lt 7 lc rgb "#3399FF" lw 5   w l
+set origin 0.0, 0.0
+set ylabel "g-r_{/*.75 z=0.1}"
+set xlabel "r_{/*.75 (z=0.1)}"
+set style fill transparent solid 0.4 noborder
+plot [-24:-17][-0.2:1.5] Mean(x) notitle  lt 2 lw 2 lc rgb "black"  w l, "+"  u 1:(Mean($1)+3.0*s($1)):(Mean($1)-3.0*s($1)) notitle lw 2 lc rgb "black" lt 1 w filledcurve\
+, "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-HR-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw  5  w l\
+, "analysis/0.0.1-run-v2/tot/0.0.1-run-v2-HR-stats.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw  5  w l\
+, "analysis/0.0.1-run-v3/tot/0.0.1-run-v3-HR-stats.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw  5  w l\
+, "analysis/0.0.1-run-v4/tot/0.0.1-run-v4-HR-stats.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw  5  w l\
+, "analysis/0.0.1-run-v5/tot/0.0.1-run-v5-HR-stats.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC" lw  5  w l\
+, "analysis/0.0.1-run-v6/tot/0.0.1-run-v6-HR-stats.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw  5  w l\
+, "analysis/0.0.1-run-v7/tot/0.0.1-run-v7-HR-stats.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw  5  w l\
+, "analysis/0.0.1-run-v8/tot/0.0.1-run-v8-HR-stats.dat"  u 1:3 t "run-v8"  lt 5 lc rgb "#CC6600" lw 5   w l\
+, "analysis/0.0.1-run-v9/tot/0.0.1-run-v9-HR-stats.dat"  u 1:3 t "run-v9"  lt 6 lc rgb "#339900" lw 5   w l\
+, "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-HR-stats.dat"  u 1:3 t "run-v10"  lt 7 lc rgb "#3399FF" lw 5   w l
+unset multiplot
+reset
+#"#0000FF" azul
+#"#006600" verde
+#"#993300" cafe
+
+
+
+
+
+##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass)  
+reset
+set border  lw 3
+set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,9"  size 8.2inch, 11inch
+set key font "Times-New-Roman"
+set output "plots/0.0.1-run-v1-10/run-v1-10-stellarMass-gasFrac.pdf"
+set multiplot
+set size 1,0.5
+set origin 0.0, 0.0
+set tmargin 0
+set ytics 0.0,0.1,0.6
+set ytics format "%.3f"
+set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
+set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set style fill transparent solid 0.3 noborder
+plot [9.5:12][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) t "Bell et al. 2003"  \
+ps 0.5 pt 1 lc rgb "gray"\
+,"analysis/0.0.1-run-v1/tot/0.0.1-run-v1-gas-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+,"analysis/0.0.1-run-v2/tot/0.0.1-run-v2-gas-frac-stats.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-gas-frac-stats.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+,"analysis/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+,"analysis/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l\
+,"analysis/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l\
+, "analysis/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:3 t "run-v8"  lt 5 lc rgb "#CC6600" lw 5   w l\
+, "analysis/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:3 t "run-v9"  lt 6 lc rgb "#339900" lw 5   w l\
+, "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-gas-frac-stats.dat"  u 1:3 t "run-v10"  lt 7 lc rgb "#3399FF" lw 5   w l
+set origin 0.0, 0.5
+set ylabel "{/Symbol s}^{/*0.75 2}"
+set ytics 0.0,0.005
+set bmargin 0
+set tmargin 1.5
+#set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+unset xlabel
+set xtics format ""
+set style fill transparent solid 0.3 noborder
+plot [9.5:12][:]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-gas-frac-stats.dat" u 1:6 t "run-v1" lt 1 lw 5 w l\
+, "analysis/0.0.1-run-v2/tot/0.0.1-run-v2-gas-frac-stats.dat" u 1:6 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+, "analysis/0.0.1-run-v3/tot/0.0.1-run-v3-gas-frac-stats.dat" u 1:6 t "run-v3" lt 3 lc rgb "#0000FF"  lw 5 w l\
+, "analysis/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat" u 1:6 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+, "analysis/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat" u 1:6 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+, "analysis/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat" u 1:6 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l\
+, "analysis/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat" u 1:6 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l\
+, "analysis/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:6 t "run-v8"  lt 5 lc rgb "#CC6600" lw 5   w l\
+, "analysis/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:6 t "run-v9"  lt 6 lc rgb "#339900" lw 5   w l\
+, "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-gas-frac-stats.dat"  u 1:6 t "run-v10"  lt 7 lc rgb "#3399FF" lw 5   w l
+unset multiplot
+reset
+
+
+
+
+
+##Halo Mass vs. Stellar Mass v2
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 11inch
+set output "plots/0.0.1-run-v1-10/run-v1-10-haloMass-stellarMass.pdf"
+set multiplot
+set size 1,0.5
+set origin 0.0, 0.5
+set key font "Times-New-Roman"
+set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+set style fill transparent solid 0.6 noborder
+plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "\
+Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+, "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-statistics.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+,"analysis/0.0.1-run-v2/tot/0.0.1-run-v2-statistics.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-statistics.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-statistics.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+,"analysis/0.0.1-run-v5/tot/0.0.1-run-v5-statistics.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+,"analysis/0.0.1-run-v6/tot/0.0.1-run-v6-statistics.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l\
+,"analysis/0.0.1-run-v7/tot/0.0.1-run-v7-statistics.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l\
+, "analysis/0.0.1-run-v8/tot/0.0.1-run-v8-statistics.dat"  u 1:3 t "run-v8"  lt 5 lc rgb "#CC6600" lw 5   w l\
+, "analysis/0.0.1-run-v9/tot/0.0.1-run-v9-statistics.dat"  u 1:3 t "run-v9"  lt 6 lc rgb "#339900" lw 5   w l\
+, "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-statistics.dat"  u 1:3 t "run-v10"  lt 7 lc rgb "#3399FF" lw 5   w l
+set origin 0.0, 0.0
+set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set style fill transparent solid 0.25 noborder
+set key bottom
+plot [:11][:0.6]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-bulge-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" w l\
+,"analysis/0.0.1-run-v2/tot/0.0.1-run-v2-bulge-frac-stats.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-bulge-frac-stats.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-bulge-frac-stats.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+,"analysis/0.0.1-run-v5/tot/0.0.1-run-v5-bulge-frac-stats.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+,"analysis/0.0.1-run-v6/tot/0.0.1-run-v6-bulge-frac-stats.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l\
+,"analysis/0.0.1-run-v7/tot/0.0.1-run-v7-bulge-frac-stats.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l\
+, "analysis/0.0.1-run-v8/tot/0.0.1-run-v8-bulge-frac-stats.dat"  u 1:3 t "run-v8"  lt 5 lc rgb "#CC6600" lw 5   w l\
+, "analysis/0.0.1-run-v9/tot/0.0.1-run-v9-bulge-frac-stats.dat"  u 1:3 t "run-v9"  lt 6 lc rgb "#339900" lw 5   w l\
+, "analysis/0.0.1-run-v10/tot/0.0.1-run-v10-bulge-frac-stats.dat"  u 1:3 t "run-v10"  lt 7 lc rgb "#3399FF" lw 5   w l
+unset multiplot
+
+
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 5inch
+# set output "plots/0.0.1-run-v1-7/0.0.1-run-v1-7-T_F-vel-starMass.pdf"
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.6 noborder
+# plot [1.7:2.5][8.5:11.5]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v2/tot/0.0.1-run-v2-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+# ,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+# ,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+# ,"analysis/0.0.1-run-v5/tot/0.0.1-run-v5-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+# ,"analysis/0.0.1-run-v6/tot/0.0.1-run-v6-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l\
+# ,"analysis/0.0.1-run-v7/tot/0.0.1-run-v7-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l
+
+
+# #################################################################################################################################################### 
+# #                                                    SPIN METHOD 
+# #################################################################################################################################################### 
+
+# #Tully Fischer
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,9" size 8.2inch, 11inch
+# set output "plots/0.0.1-run-v1-7/spin-T_F-velmax-magnitude.pdf"
+# set multiplot
+# set size 1,0.5
+# #set rmargin 3
+# set origin 0.0, 0.5
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+# set ylabel "i_{/*.75 (z=0.1)}"
+# set style fill transparent solid 0.6 noborder
+# plot [1.4:2.6][-24:-18]  "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 4 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v1"  lt 1 lc rgb "red" lw  5  w l\
+# , "analysis/0.0.1-run-v2/tot/0.0.1-run-v2-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v2"  lt 2 lc rgb "gold" lw 5  w l\
+# , "analysis/0.0.1-run-v3/tot/0.0.1-run-v3-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v3"  lt 3 lc rgb "#0000FF" lw 5   w l
+# set origin 0.0, 0.0
+# set ylabel "g-r_{/*.75 z=0.1}"
+# set xlabel "r_{/*.75 (z=0.1)}"
+# set style fill transparent solid 0.4 noborder
+# plot [-24:-17][-0.2:1.5] Mean(x) notitle  lt 2 lw 2 lc rgb "black"  w l, "+"  u 1:(Mean($1)+3.0*s($1)):(Mean($1)-3.0*s($1)) notitle lw 2 lc rgb "black" lt 1 w filledcurve\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-HR-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw  5  w l\
+# , "analysis/0.0.1-run-v2/tot/0.0.1-run-v2-HR-stats.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw  5  w l\
+# , "analysis/0.0.1-run-v3/tot/0.0.1-run-v3-HR-stats.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw  5  w l
+# unset multiplot
+# reset
+# #"#0000FF" azul
+# #"#006600" verde
+# #"#993300" cafe
+
+
+
+
+
+# ##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass)  
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,9"  size 8.2inch, 11inch
+# set key font "Times-New-Roman"
+# set output "plots/0.0.1-run-v1-7/spin-stellarMass-gasFrac.pdf"
+# set multiplot
+# set size 1,0.5
+# set origin 0.0, 0.0
+# set tmargin 0
+# set ytics 0.0,0.1,0.6
+# set ytics format "%.3f"
+# set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.3 noborder
+# plot [9.5:12][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) t "Bell et al. 2003"  \
+# ps 0.5 pt 1 lc rgb "gray"\
+# ,"analysis/0.0.1-run-v1/tot/0.0.1-run-v1-gas-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v2/tot/0.0.1-run-v2-gas-frac-stats.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+# ,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-gas-frac-stats.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l
+# set origin 0.0, 0.5
+# set ylabel "{/Symbol s}^{/*0.75 2}"
+# set ytics 0.0,0.005
+# set bmargin 0
+# set tmargin 1.5
+# #set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# unset xlabel
+# set xtics format ""
+# set style fill transparent solid 0.3 noborder
+# plot [9.5:12][:]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-gas-frac-stats.dat" u 1:6 t "run-v1" lt 1 lw 5 w l\
+# , "analysis/0.0.1-run-v2/tot/0.0.1-run-v2-gas-frac-stats.dat" u 1:6 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+# , "analysis/0.0.1-run-v3/tot/0.0.1-run-v3-gas-frac-stats.dat" u 1:6 t "run-v3" lt 3 lc rgb "#0000FF"  lw 5 w l
+# unset multiplot
+# reset
+
+
+
+
+
+# ##Halo Mass vs. Stellar Mass v2
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 11inch
+# set output "plots/0.0.1-run-v1-7/spin-haloMass-stellarMass.pdf"
+# set multiplot
+# set size 1,0.5
+# set origin 0.0, 0.5
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+# set style fill transparent solid 0.6 noborder
+# plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "\
+# Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-statistics.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v2/tot/0.0.1-run-v2-statistics.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+# ,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-statistics.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l
+# set origin 0.0, 0.0
+# set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.25 noborder
+# plot [:11][:0.6]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-bulge-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" w l\
+# ,"analysis/0.0.1-run-v2/tot/0.0.1-run-v2-bulge-frac-stats.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+# ,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-bulge-frac-stats.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l
+# unset multiplot
+
+
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 5inch
+# set output "plots/0.0.1-run-v1-7/spin-T_F-vel-starMass.pdf"
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.6 noborder
+# plot [1.7:2.5][8.5:11.5]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v2/tot/0.0.1-run-v2-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+# ,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l
+
+
+
+# #################################################################################################################################################### 
+# #                                                         gasMovesTo
+# #################################################################################################################################################### 
+
+# #Tully Fischer
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,9" size 8.2inch, 11inch
+# set output "plots/0.0.1-run-v1-7/gasMovesTo-T_F-velmax-magnitude.pdf"
+# set multiplot
+# set size 1,0.5
+# #set rmargin 3
+# set origin 0.0, 0.5
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+# set ylabel "i_{/*.75 (z=0.1)}"
+# set style fill transparent solid 0.6 noborder
+# plot [1.4:2.6][-24:-18]  "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 4 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v1"  lt 1 lc rgb "red" lw  5  w l\
+# , "analysis/0.0.1-run-v3/tot/0.0.1-run-v3-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v3"  lt 3 lc rgb "#0000FF" lw 5   w l\
+# , "analysis/0.0.1-run-v4/tot/0.0.1-run-v4-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v4"  lt 4 lc rgb "#006600" lw 5   w l
+# set origin 0.0, 0.0
+# set ylabel "g-r_{/*.75 z=0.1}"
+# set xlabel "r_{/*.75 (z=0.1)}"
+# set style fill transparent solid 0.4 noborder
+# plot [-24:-17][-0.2:1.5] Mean(x) notitle  lt 2 lw 2 lc rgb "black"  w l, "+"  u 1:(Mean($1)+3.0*s($1)):(Mean($1)-3.0*s($1)) notitle lw 2 lc rgb "black" lt 1 w filledcurve\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-HR-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw  5  w l\
+# , "analysis/0.0.1-run-v3/tot/0.0.1-run-v3-HR-stats.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw  5  w l\
+# , "analysis/0.0.1-run-v4/tot/0.0.1-run-v4-HR-stats.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw  5  w l
+# unset multiplot
+# reset
+# #"#0000FF" azul
+# #"#006600" verde
+# #"#993300" cafe
+
+
+
+
+
+# ##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass)  
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,9"  size 8.2inch, 11inch
+# set key font "Times-New-Roman"
+# set output "plots/0.0.1-run-v1-7/gasMovesTo-stellarMass-gasFrac.pdf"
+# set multiplot
+# set size 1,0.5
+# set origin 0.0, 0.0
+# set tmargin 0
+# set ytics 0.0,0.1,0.6
+# set ytics format "%.3f"
+# set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.3 noborder
+# plot [9.5:12][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) t "Bell et al. 2003"  \
+# ps 0.5 pt 1 lc rgb "gray"\
+# ,"analysis/0.0.1-run-v1/tot/0.0.1-run-v1-gas-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-gas-frac-stats.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+# ,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l
+# set origin 0.0, 0.5
+# set ylabel "{/Symbol s}^{/*0.75 2}"
+# set ytics 0.0,0.005
+# set bmargin 0
+# set tmargin 1.5
+# #set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# unset xlabel
+# set xtics format ""
+# set style fill transparent solid 0.3 noborder
+# plot [9.5:12][:]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-gas-frac-stats.dat" u 1:6 t "run-v1" lt 1 lw 5 w l\
+# , "analysis/0.0.1-run-v3/tot/0.0.1-run-v3-gas-frac-stats.dat" u 1:6 t "run-v3" lt 3 lc rgb "#0000FF"  lw 5 w l\
+# , "analysis/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat" u 1:6 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l
+# unset multiplot
+# reset
+
+
+
+
+
+# ##Halo Mass vs. Stellar Mass v2
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 11inch
+# set output "plots/0.0.1-run-v1-7/gasMovesTo-haloMass-stellarMass.pdf"
+# set multiplot
+# set size 1,0.5
+# set origin 0.0, 0.5
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+# set style fill transparent solid 0.6 noborder
+# plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "\
+# Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-statistics.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-statistics.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+# ,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-statistics.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l
+# set origin 0.0, 0.0
+# set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.25 noborder
+# plot [:11][:0.6]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-bulge-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" w l\
+# ,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-bulge-frac-stats.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+# ,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-bulge-frac-stats.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l
+# unset multiplot
+
+
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 5inch
+# set output "plots/0.0.1-run-v1-7/gasMovesTo-T_F-vel-starMass.pdf"
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.6 noborder
+# plot [1.7:2.5][8.5:11.5]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v3/tot/0.0.1-run-v3-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+# ,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l
+
+
+
+# #################################################################################################################################################### 
+# #                                           STAR-FORMATION-EFFICIENCY
+# #################################################################################################################################################### 
+
+# #Tully Fischer
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,9" size 8.2inch, 11inch
+# set output "plots/0.0.1-run-v1-7/star-form-disk-eff-T_F-velmax-magnitude.pdf"
+# set multiplot
+# set size 1,0.5
+# #set rmargin 3
+# set origin 0.0, 0.5
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+# set ylabel "i_{/*.75 (z=0.1)}"
+# set style fill transparent solid 0.6 noborder
+# plot [1.4:2.6][-24:-18]  "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 4 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v1"  lt 1 lc rgb "red" lw  5  w l\
+# , "analysis/0.0.1-run-v4/tot/0.0.1-run-v4-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v4"  lt 4 lc rgb "#006600" lw 5   w l\
+# , "analysis/0.0.1-run-v5/tot/0.0.1-run-v5-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v5"  lt 5 lc rgb "#9900CC" lw 5   w l\
+# , "analysis/0.0.1-run-v6/tot/0.0.1-run-v6-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v6"  lt 6 lc rgb "#009999" lw 5   w l
+# set origin 0.0, 0.0
+# set ylabel "g-r_{/*.75 z=0.1}"
+# set xlabel "r_{/*.75 (z=0.1)}"
+# set style fill transparent solid 0.4 noborder
+# plot [-24:-17][-0.2:1.5] Mean(x) notitle  lt 2 lw 2 lc rgb "black"  w l, "+"  u 1:(Mean($1)+3.0*s($1)):(Mean($1)-3.0*s($1)) notitle lw 2 lc rgb "black" lt 1 w filledcurve\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-HR-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw  5  w l\
+# , "analysis/0.0.1-run-v4/tot/0.0.1-run-v4-HR-stats.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw  5  w l\
+# , "analysis/0.0.1-run-v5/tot/0.0.1-run-v5-HR-stats.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC" lw  5  w l\
+# , "analysis/0.0.1-run-v6/tot/0.0.1-run-v6-HR-stats.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw  5  w l
+# unset multiplot
+# reset
+# #"#0000FF" azul
+# #"#006600" verde
+# #"#993300" cafe
+
+
+
+
+
+# ##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass)  
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,9"  size 8.2inch, 11inch
+# set key font "Times-New-Roman"
+# set output "plots/0.0.1-run-v1-7/star-form-disk-eff-stellarMass-gasFrac.pdf"
+# set multiplot
+# set size 1,0.5
+# set origin 0.0, 0.0
+# set tmargin 0
+# set ytics 0.0,0.1,0.6
+# set ytics format "%.3f"
+# set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.3 noborder
+# plot [9.5:12][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) t "Bell et al. 2003"  \
+# ps 0.5 pt 1 lc rgb "gray"\
+# ,"analysis/0.0.1-run-v1/tot/0.0.1-run-v1-gas-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+# ,"analysis/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+# ,"analysis/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l
+# set origin 0.0, 0.5
+# set ylabel "{/Symbol s}^{/*0.75 2}"
+# set ytics 0.0,0.005
+# set bmargin 0
+# set tmargin 1.5
+# #set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# unset xlabel
+# set xtics format ""
+# set style fill transparent solid 0.3 noborder
+# plot [9.5:12][:]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-gas-frac-stats.dat" u 1:6 t "run-v1" lt 1 lw 5 w l\
+# , "analysis/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat" u 1:6 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+# , "analysis/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat" u 1:6 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+# , "analysis/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat" u 1:6 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l
+# unset multiplot
+# reset
+
+
+
+
+
+# ##Halo Mass vs. Stellar Mass v2
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 11inch
+# set output "plots/0.0.1-run-v1-7/star-form-disk-eff-haloMass-stellarMass.pdf"
+# set multiplot
+# set size 1,0.5
+# set origin 0.0, 0.5
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+# set style fill transparent solid 0.6 noborder
+# plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "\
+# Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-statistics.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-statistics.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+# ,"analysis/0.0.1-run-v5/tot/0.0.1-run-v5-statistics.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+# ,"analysis/0.0.1-run-v6/tot/0.0.1-run-v6-statistics.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l
+# set origin 0.0, 0.0
+# set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.25 noborder
+# plot [:11][:0.6]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-bulge-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" w l\
+# ,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-bulge-frac-stats.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+# ,"analysis/0.0.1-run-v5/tot/0.0.1-run-v5-bulge-frac-stats.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+# ,"analysis/0.0.1-run-v6/tot/0.0.1-run-v6-bulge-frac-stats.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l
+# unset multiplot
+
+
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 5inch
+# set output "plots/0.0.1-run-v1-7/star-form-disk-eff-T_F-vel-starMass.pdf"
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.6 noborder
+# plot [1.7:2.5][8.5:11.5]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v4/tot/0.0.1-run-v4-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+# ,"analysis/0.0.1-run-v5/tot/0.0.1-run-v5-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+# ,"analysis/0.0.1-run-v6/tot/0.0.1-run-v6-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l
+
+
+
+
+# #################################################################################################################################################### 
+# #                                                  DISK OUTFLOW EXPONENT
+# #################################################################################################################################################### 
+
+# #Tully Fischer
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,9" size 8.2inch, 11inch
+# set output "plots/0.0.1-run-v1-7/disk-flow-expo-T_F-velmax-magnitude.pdf"
+# set multiplot
+# set size 1,0.5
+# #set rmargin 3
+# set origin 0.0, 0.5
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+# set ylabel "i_{/*.75 (z=0.1)}"
+# set style fill transparent solid 0.6 noborder
+# plot [1.4:2.6][-24:-18]  "reference/SDSSTully-Fisher.dat" u (log10($3)):1:(log10($3+$4)):(log10($3-$4)):($1+$2):($1-$2) t "SDSS" lw 4 ps 0 pt 5 lt 1 lc rgb "black" w xyerrorbars\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v1"  lt 1 lc rgb "red" lw  5  w l\
+# , "analysis/0.0.1-run-v7/tot/0.0.1-run-v7-tully-fisher-stats.dat"  u (log10($3)):1 t "run-v7"  lt 7 lc rgb "#FF00CC" lw 5   w l
+# set origin 0.0, 0.0
+# set ylabel "g-r_{/*.75 z=0.1}"
+# set xlabel "r_{/*.75 (z=0.1)}"
+# set style fill transparent solid 0.4 noborder
+# plot [-24:-17][-0.2:1.5] Mean(x) notitle  lt 2 lw 2 lc rgb "black"  w l, "+"  u 1:(Mean($1)+3.0*s($1)):(Mean($1)-3.0*s($1)) notitle lw 2 lc rgb "black" lt 1 w filledcurve\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-HR-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw  5  w l\
+# , "analysis/0.0.1-run-v7/tot/0.0.1-run-v7-HR-stats.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw  5  w l
+# unset multiplot
+# reset
+# #"#0000FF" azul
+# #"#006600" verde
+# #"#993300" cafe
+
+
+
+
+
+# ##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass)  
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,9"  size 8.2inch, 11inch
+# set key font "Times-New-Roman"
+# set output "plots/0.0.1-run-v1-7/disk-flow-expo-stellarMass-gasFrac.pdf"
+# set multiplot
+# set size 1,0.5
+# set origin 0.0, 0.0
+# set tmargin 0
+# set ytics 0.0,0.1,0.6
+# set ytics format "%.3f"
+# set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.3 noborder
+# plot [9.5:12][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) t "Bell et al. 2003"  \
+# ps 0.5 pt 1 lc rgb "gray"\
+# ,"analysis/0.0.1-run-v1/tot/0.0.1-run-v1-gas-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l
+# set origin 0.0, 0.5
+# set ylabel "{/Symbol s}^{/*0.75 2}"
+# set ytics 0.0,0.005
+# set bmargin 0
+# set tmargin 1.5
+# #set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# unset xlabel
+# set xtics format ""
+# set style fill transparent solid 0.3 noborder
+# plot [9.5:12][:]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-gas-frac-stats.dat" u 1:6 t "run-v1" lt 1 lw 5 w l\
+# , "analysis/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat" u 1:6 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l
+# unset multiplot
+# reset
+
+
+
+
+
+# ##Halo Mass vs. Stellar Mass v2
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 11inch
+# set output "plots/0.0.1-run-v1-7/disk-flow-expo-haloMass-stellarMass.pdf"
+# set multiplot
+# set size 1,0.5
+# set origin 0.0, 0.5
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+# set style fill transparent solid 0.6 noborder
+# plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "\
+# Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+# , "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-statistics.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v7/tot/0.0.1-run-v7-statistics.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l
+# set origin 0.0, 0.0
+# set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.25 noborder
+# plot [:11][:0.6]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-bulge-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" w l\
+# ,"analysis/0.0.1-run-v7/tot/0.0.1-run-v7-bulge-frac-stats.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l
+# unset multiplot
+
+
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 5inch
+# set output "plots/0.0.1-run-v1-7/disk-flow-expo-T_F-vel-starMass.pdf"
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10} V_{/*0.75 max}"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.6 noborder
+# plot [1.7:2.5][8.5:11.5]  "analysis/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis/0.0.1-run-v7/tot/0.0.1-run-v7-tully-fisher-mod-stats.dat" u (log10($3)):1 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l

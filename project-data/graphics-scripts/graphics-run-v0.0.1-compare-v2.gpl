@@ -1,0 +1,208 @@
+#!/usr/bin/gnuplot
+
+
+#beta=0.7817;      gamma=0.7334;      M1s=10**12.1988;      ms0_M0=0.0186
+mc(x, beta, gamma, M1s, ms0_M0)=2.0*x*(ms0_M0)*( (x/M1s)**(-beta)  +  (x/M1s)**(gamma) )**(-1)
+mc2(x, beta, gamma, M1s, ms0_M0) = 2.0*(10**x)*(ms0_M0)*( (10**x/10**M1s)**(-beta)  +  (10**x/10**M1s)**(gamma) )**(-1)
+mc3(x, beta, gamma, M1s, ms0_M0) = 2.0*(ms0_M0)*( (10**x/10**M1s)**(-beta)  +  (10**x/10**M1s)**(gamma) )**(-1)
+
+#error
+DIV_ERROR(x,dx,y,dy)=x*(dx/x+dy/y)/y
+
+
+Mean(M) = -0.0772557*M - 0.88334
+s(M) = 0.0059*M + 0.2632
+
+
+
+
+#################################################################################################################################################### 
+
+
+##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass)  
+reset
+set border  lw 3.5
+set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,7"  size 7inch, 7inch
+set key font "Times-New-Roman"
+set output "plots-v2/0.0.1-run-v1-13/0.0.1-run-v1-13-multiplot-table.pdf"
+set multiplot
+###########THIRD ROW####################
+set size 0.36,0.33
+set origin 0.0, 0.0
+set tmargin 0
+set rmargin 0
+set ytics 0.0,0.1,0.6
+set ytics format "%.1f"
+set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
+set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set xtics nomirror
+plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) notitle  \
+ps 0.5 pt 1 lc rgb "gray"\
+,"analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat" u 1:3 t "run-v4" lt 1  lw 5 w l\
+,"analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat" u 1:3 t "run-v7" lt 2  lw 5 w l\
+, "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:3 t "run-v8"  lt 3  lw 5   w l\
+, "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:3 t "run-v9"  lt 4  lw 5   w l
+set size 0.31,0.33
+set origin 0.36, 0.0
+set lmargin 0
+set ytics format ""
+set xtics 10.0, 0.5, 12
+unset ylabel
+plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) notitle  \
+ps 0.5 pt 1 lc rgb "gray"\
+, "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat" u 1:3 t "run-v4" lt 1  lw 5 w l\
+, "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat" u 1:3 t "run-v5" lt 2  lw 5 w l\
+, "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat"  u 1:3 t "run-v6"  lt 3  lw 5   w l\
+, "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-gas-frac-stats.dat"  u 1:3 t "run-v11"  lt 4  lw 5   w l\
+, "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-gas-frac-stats.dat"  u 1:3 t "run-v12"  lt 5  lw 5   w l\
+, "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-gas-frac-stats.dat"  u 1:3 t "run-v13"  lt 6  lw 5   w l
+set size 0.31,0.33
+set origin 0.67, 0.0
+plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) t "Bell et al. 2003"  \
+ps 0.5 pt 1 lc rgb "gray"\
+, "analysis-v2/0.0.1-run-v3/tot/0.0.1-run-v3-gas-frac-stats.dat" u 1:3 t "run-v3" lt 2  lw 5 w l\
+, "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat" u 1:3 t "run-v4" lt 1  lw 5 w l\
+###########SECOND ROW####################
+set key bottom
+set size 0.36,0.33
+set origin 0.0, 0.33
+set lmargin 7.7
+set tmargin 4
+set bmargin 0
+set rmargin 0
+set ytics format "%.2f"
+set ytics 0.25,0.05,0.6
+set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+unset xlabel
+set x2tics 10, 0.2, 10.8 nomirror
+unset xtics
+plot [10:11][0.25:0.6]  "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-bulge-frac-stats.dat" u 1:3 notitle lt 1  lw 5 w l\
+,"analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-bulge-frac-stats.dat" u 1:3 notitle lt 2  lw 5 w l\
+, "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-bulge-frac-stats.dat"  u 1:3  notitle  lt 3  lw 5   w l\
+, "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-bulge-frac-stats.dat"  u 1:3  notitle  lt 4  lw 5   w l
+set size 0.31,0.33
+set origin 0.36, 0.33
+set lmargin 0
+set ytics format ""
+unset ylabel
+plot [10:11][0.25:0.6]  "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-bulge-frac-stats.dat" u 1:3 notitle lt 1  lw 5 w l\
+, "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-bulge-frac-stats.dat" u 1:3 notitle lt 2  lw 5 w l\
+, "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-bulge-frac-stats.dat"  u 1:3 notitle  lt 3  lw 5   w l\
+, "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-bulge-frac-stats.dat"  u 1:3 notitle  lt 4  lw 5   w l\
+, "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-bulge-frac-stats.dat"  u 1:3 notitle  lt 5  lw 5   w l\
+, "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-bulge-frac-stats.dat"  u 1:3 notitle  lt 6  lw 5   w l
+set size 0.31,0.33
+set origin 0.67, 0.33
+set x2tics 10, 0.2, 12 nomirror
+plot [10:11][0.25:0.6] "analysis-v2/0.0.1-run-v3/tot/0.0.1-run-v3-bulge-frac-stats.dat" u 1:3 notitle lt 2  lw 5 w l\
+, "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-bulge-frac-stats.dat" u 1:3 notitle lt 1  lw 5 w l\
+
+###########FIRST ROW####################
+set size 0.36,0.33
+set origin 0.0, 0.68
+set key top
+set tmargin 4
+set rmargin 0
+set lmargin 7.7
+unset x2tics
+set ytics -3, 0.5, 0 format "%g"
+set xtics 10.5,0.5,13.5
+set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+set style fill transparent solid 0.6 noborder
+plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) \
+notitle lw 2 lc rgb "black" lt 1 w filledcurve\
+,"analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-star-frac-stats.dat" u 1:3 notitle lt 1  lw 5 w l\
+,"analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-star-frac-stats.dat" u 1:3 notitle lt 2  lw 5 w l\
+, "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-star-frac-stats.dat"  u 1:3 notitle  lt 3  lw 5   w l\
+, "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-star-frac-stats.dat"  u 1:3 notitle  lt 4  lw 5   w l
+set size 0.31,0.33
+set origin 0.36, 0.68
+set lmargin 0
+set ytics format ""
+unset ylabel
+set style fill transparent solid 0.6 noborder
+plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) \
+notitle lw 2 lc rgb "black" lt 1 w filledcurve\
+, "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-star-frac-stats.dat" u 1:3 notitle lt 1  lw 5 w l\
+, "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-star-frac-stats.dat" u 1:3 notitle lt 2  lw 5 w l\
+, "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-star-frac-stats.dat"  u 1:3 notitle  lt 3  lw 5   w l\
+, "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-star-frac-stats.dat"  u 1:3 notitle  lt 4  lw 5   w l\
+, "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-star-frac-stats.dat"  u 1:3 notitle  lt 5  lw 5   w l\
+, "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-star-frac-stats.dat"  u 1:3 notitle  lt 6  lw 5   w l
+set size 0.31,0.33
+set origin 0.67, 0.68
+set xtics 10.5,0.5,14
+set style fill transparent solid 0.6 noborder
+plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "\
+Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+, "analysis-v2/0.0.1-run-v3/tot/0.0.1-run-v3-star-frac-stats.dat" u 1:3 notitle lt 2  lw 5 w l\
+, "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-star-frac-stats.dat" u 1:3 notitle lt 1  lw 5 w l\
+
+
+
+
+
+
+# set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+# set style fill transparent solid 0.6 noborder
+# plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "\
+# Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+# , "analysis-v2/0.0.1-run-v1/tot/0.0.1-run-v1-statistics.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v2/tot/0.0.1-run-v2-statistics.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v3/tot/0.0.1-run-v3-statistics.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-statistics.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-statistics.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-statistics.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-statistics.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l\
+# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-statistics.dat"  u 1:3 t "run-v8"  lt 5 lc rgb "#CC6600" lw 5   w l\
+# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-statistics.dat"  u 1:3 t "run-v9"  lt 6 lc rgb "#339900" lw 5   w l\
+# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-statistics.dat"  u 1:3 t "run-v10"  lt 7 lc rgb "#3399FF" lw 5   w l
+
+
+
+
+
+# ##Halo Mass vs. Stellar Mass v2
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"   size 8.2inch, 11inch
+# set output "plots-v2/0.0.1-run-v1-10/run-v1-10-haloMass-stellarMass.pdf"
+# set multiplot
+# set size 1,0.5
+# set origin 0.0, 0.5
+# set key font "Times-New-Roman"
+# set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+# set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+# set style fill transparent solid 0.6 noborder
+# plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "\
+# Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+# , "analysis-v2/0.0.1-run-v1/tot/0.0.1-run-v1-statistics.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v2/tot/0.0.1-run-v2-statistics.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v3/tot/0.0.1-run-v3-statistics.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-statistics.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-statistics.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-statistics.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-statistics.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l\
+# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-statistics.dat"  u 1:3 t "run-v8"  lt 5 lc rgb "#CC6600" lw 5   w l\
+# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-statistics.dat"  u 1:3 t "run-v9"  lt 6 lc rgb "#339900" lw 5   w l\
+# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-statistics.dat"  u 1:3 t "run-v10"  lt 7 lc rgb "#3399FF" lw 5   w l
+# set origin 0.0, 0.0
+# set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# set style fill transparent solid 0.25 noborder
+# set key bottom
+# plot [:11][:0.6]  "analysis-v2/0.0.1-run-v1/tot/0.0.1-run-v1-bulge-frac-stats.dat" u 1:3 t "run-v1" lt 1 lc rgb "red" w l\
+# ,"analysis-v2/0.0.1-run-v2/tot/0.0.1-run-v2-bulge-frac-stats.dat" u 1:3 t "run-v2" lt 2 lc rgb "gold" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v3/tot/0.0.1-run-v3-bulge-frac-stats.dat" u 1:3 t "run-v3" lt 3 lc rgb "#0000FF" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-bulge-frac-stats.dat" u 1:3 t "run-v4" lt 4 lc rgb "#006600" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-bulge-frac-stats.dat" u 1:3 t "run-v5" lt 5 lc rgb "#9900CC"  lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-bulge-frac-stats.dat" u 1:3 t "run-v6" lt 6 lc rgb "#009999" lw 5 w l\
+# ,"analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-bulge-frac-stats.dat" u 1:3 t "run-v7" lt 7 lc rgb "#FF00CC" lw 5 w l\
+# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-bulge-frac-stats.dat"  u 1:3 t "run-v8"  lt 5 lc rgb "#CC6600" lw 5   w l\
+# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-bulge-frac-stats.dat"  u 1:3 t "run-v9"  lt 6 lc rgb "#339900" lw 5   w l\
+# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-bulge-frac-stats.dat"  u 1:3 t "run-v10"  lt 7 lc rgb "#3399FF" lw 5   w l
+# unset multiplot
+
+

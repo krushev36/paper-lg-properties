@@ -1,0 +1,100 @@
+#!/usr/bin/gnuplot
+
+
+
+#################################################################################################################################################### 
+
+reset
+set border  lw 4
+set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,9" size 5in,5in
+set output "plots-v2/0.0.1-run-v1-13/run-v1-13-mw-chi-squared-no-halo-normal-histogram-v2.pdf"
+set key font "Times-New-Roman"
+set ylabel "N_{*}(\360\235\233\277)"
+set xlabel "\360\235\233\277"
+plot [0:1.5][]"./analysis-v2/0.0.1-run-v1/tot/mw-chi-squared-no-halo-histogram-v2.dat" u 1:($3/(($2-$1)*8997)) t "R1" lc rgb "#F78181" lw 4 w histeps\
+,  "./analysis-v2/0.0.1-run-v4/tot/mw-chi-squared-no-halo-histogram-v2.dat" u 1:($3/(($2-$1)*8997)) t "R3" lc rgb "#FF0000" lw 4  w histeps\
+,  "./analysis-v2/0.0.1-run-v6/tot/mw-chi-squared-no-halo-histogram-v2.dat" u 1:($3/(($2-$1)*8997)) t "E3" lc rgb "#8A0808" lw 4  w histeps\
+,  "./analysis-v2/0.0.1-run-v9/tot/mw-chi-squared-no-halo-histogram-v2.dat" u 1:($3/(($2-$1)*8997)) t "A3" lc rgb "#190707" lw 4  w histeps
+
+
+
+reset
+set border  lw 4
+set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,9" size 5in,5in
+set output "plots-v2/0.0.1-run-v1-13/run-v1-13-m31-chi-squared-no-halo-normal-histogram-v2.pdf"
+set key font "Times-New-Roman"
+set ylabel "N_*(\360\235\233\277)"
+set xlabel "\360\235\233\277"
+plot [0:1.5][]"./analysis-v2/0.0.1-run-v1/tot/m31-chi-squared-no-halo-histogram-v2.dat" u 1:($3/(($2-$1)*8997)) t "R1" lc rgb "#F78181" lw 4 w histeps\
+,  "./analysis-v2/0.0.1-run-v4/tot/m31-chi-squared-no-halo-histogram-v2.dat" u 1:($3/(($2-$1)*8997)) t "R3" lc rgb "#FF0000" lw 4  w histeps\
+,  "./analysis-v2/0.0.1-run-v6/tot/m31-chi-squared-no-halo-histogram-v2.dat" u 1:($3/(($2-$1)*8997)) t "E3" lc rgb "#8A0808" lw 4  w histeps\
+,  "./analysis-v2/0.0.1-run-v9/tot/m31-chi-squared-no-halo-histogram-v2.dat" u 1:($3/(($2-$1)*8997)) t "A3" lc rgb "#190707" lw 4  w histeps
+
+
+
+
+
+reset
+set border  lw 4
+set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,7" size 5in,3in
+set output "plots-v2/0.0.1-run-v1-13/chi-squared-star-form-eff-v2.pdf"
+set key font "Times-New-Roman"
+set ylabel "N(\316\224\306\220)"
+set xlabel "{\317\265}_{/*.5 \342\230\205}"
+set label 1 "0.24" at 0.003, 90
+set label 2 "0.16" at 0.003, 30
+set label 3 "0.08" at 0.003, 9
+set label 4 "0.24" at 0.06, 4
+set label 5 "0.16" at 0.04, 2
+set label 6 "0.08" at 0.01, 1.2
+set logscale y
+plot [0.0:0.103][:]"analysis-v2/0.0.1-run-v1-10/MW/0.0.1-run-v1-10-mw-chi-squared-star-form-eff.dat" u 1:($2) t "MW" lw 4 ps 0.5 pt 5 w lp\
+, "analysis-v2/0.0.1-run-v1-10/M31/0.0.1-run-v1-10-m31-chi-squared-star-form-eff.dat" u 1:($2) t "M31" lc rgb "black"  lw 4 ps 0.5  pt 7 w lp
+
+
+
+
+reset
+set border  lw 3
+set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,7"  size 5in,3in
+set output "plots-v2/0.0.1-run-v1-13/chi-squared-disk-outflow-exp-v2.pdf"
+set key font "Times-New-Roman"
+set ylabel "N(\316\224\306\220)"
+set xlabel "{/Symbol a}_{/*.75 outflow}"
+set label 1 "0.24" at 1.37,60
+set label 2 "0.16" at 1.37,10
+set label 3 "0.08" at 1.37,3
+set label 4 "0.24" at 3.05,50
+set label 5 "0.16" at 3.05,20
+set label 6 "0.08" at 3.05,3
+set logscale y
+#"run-v7=1.5, run-v1=2.0, run-v8=2.5, run-v9=3.0"
+plot [1.35:3.5][:] "analysis-v2/0.0.1-run-v1-10/MW/0.0.1-run-v1-10-mw-chi-squared-disk-out-exp.dat" u 1:($2) t "MW" lw 4 ps 0.5 pt 5 w lp\
+, "analysis-v2/0.0.1-run-v1-10/M31/0.0.1-run-v1-10-m31-chi-squared-disk-out-exp.dat" u 1:($2) t "M31" lc rgb "black" lw 4 ps 0.5  pt 7 w lp
+
+
+
+
+reset
+set border  lw 3
+set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,7"  size 5in,3in
+set output "plots-v2/0.0.1-run-v1-13/chi-squared-merger-ratio-v2.pdf"
+set key font "Times-New-Roman"
+set ylabel "N(\316\224\306\220)"
+set xtics ("Bulge" 0, "Disk"  1)
+set label 1 "0.24" at -0.1,90
+set label 2 "0.16" at -0.1,20
+set label 3 "0.08" at -0.1,8
+set label 4 "0.24" at 1.05,20
+set label 5 "0.16" at 1.05,2
+set label 6 "0.08" at 1.05,1.1
+set logscale y
+#set xlabel "\316\267"
+#"run-v7=1.5, run-v1=2.0, run-v8=2.5, run-v9=3.0"
+plot [-0.25:1.25][:] "analysis-v2/0.0.1-run-v1-10/MW/0.0.1-run-v1-10-mw-chi-squared-satel-goesto.dat"  t "MW" lw 4 ps 0.5 pt 5 w lp\
+, "analysis-v2/0.0.1-run-v1-10/M31/0.0.1-run-v1-10-m31-chi-squared-satel-goesto.dat"  t "M31" lc rgb "black" lw 4 ps 0.5  pt 7 w lp
+
+
+
+
+

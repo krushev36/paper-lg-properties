@@ -1,0 +1,452 @@
+#!/usr/bin/gnuplot
+
+
+#beta=0.7817;      gamma=0.7334;      M1s=10**12.1988;      ms0_M0=0.0186
+mc(x, beta, gamma, M1s, ms0_M0)=2.0*x*(ms0_M0)*( (x/M1s)**(-beta)  +  (x/M1s)**(gamma) )**(-1) 
+mc2(x, beta, gamma, M1s, ms0_M0) = 2.0*(10**x)*(ms0_M0)*( (10**x/10**M1s)**(-beta)  +  (10**x/10**M1s)**(gamma) )**(-1) 
+mc3(x, beta, gamma, M1s, ms0_M0) = 2.0*(ms0_M0)*( (10**x/10**M1s)**(-beta)  +  (10**x/10**M1s)**(gamma) )**(-1) 
+
+#error
+DIV_ERROR(x,dx,y,dy)=x*(dx/x+dy/y)/y
+
+################################   PART 1 - VARIABLE PARAMETERS ##########################################
+
+##Halo Mass vs. Stellar Mass 
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed color font "Times-New-Roman,9"
+set output "plots/test-v7/seminario-II/Mass-StellarMass.pdf"
+set key font "Times-New-Roman"
+set xlabel "log_{/*0.75 10}(M_{/[Times-Roman][=4  DM}[M_{\342\212\231}])"
+set ylabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set style fill transparent solid 0.3 noborder
+plot [11:14][10:12]  "+" u 1:(log10(mc2($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc2($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+ , "analysis/test-v7/10909/milky-10909-diskoutflow-exp.dat" u (log10($2)):(log10($3+$5)):(0.04) t "10909" lw 2 pt 6 lc rgb "#6600cc" w circles\
+ , "analysis/test-v7/2710/milky-2710-diskoutflow-exp.dat" u (log10($2)):(log10($3+$5)):(0.04) t "2710" lw 2 pt 6  lc rgb "#009900" w circles\
+ , "analysis/test-v7/16953/milky-16953-diskoutflow-exp.dat" u (log10($2)):(log10($3+$5)):(0.04) t "16953" lw 2  pt 6 lc rgb "#ffcc00" w circles\
+ , "reference/milky-way-v2.dat" u (log10($1)):(log10($4)):(log10($2)):(log10($3)):(log10($5)):(log10($6)) t "MW" lc rgb "black" ps 0 pt 4 lw 3 lt 1 w xyerrorbars\
+ , "reference/m-31.dat" u (log10($1)):(log10($4)):(log10($2)):(log10($3)):(log10($5)):(log10($6)) t "M31" lc rgb "black" ps 0 pt 4 lw 3  lt 5 w xyerrorbars
+
+
+
+
+
+
+#Halo Mass vs. Stellar Mass v2
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed color font "Times-New-Roman,9"
+set output "plots/test-v7/seminario-II/Mass-StellarMass-v2.pdf"
+set key font "Times-New-Roman"
+set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+set style fill transparent solid 0.6 noborder
+plot [10:15][]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+ ,  "analysis/test-v7/10909/milky-10909-diskoutflow-exp.dat" u (log10($2)):(log10(($3+$5)/$2)):(0.06) t "10909" ps 1 pt 4 lc rgb "#6600cc" w circ\
+ , "analysis/test-v7/2710/milky-2710-diskoutflow-exp.dat" u (log10($2)):(log10(($3+$5)/$2)):(0.06) t "2710" ps 1 pt 4 lc rgb "#009900" w circ\
+ , "analysis/test-v7/16953/milky-16953-diskoutflow-exp.dat" u (log10($2)):(log10(($3+$5)/$2)):(0.06) t "16953" ps 1 pt 4 lc rgb "#ffcc00" w circ\
+ , "reference/milky-way-v2.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "MW" lc rgb "black" ps 0 pt 4 lw 3  lt 1 w xyerrorbars\
+ , "reference/m-31.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "M31" lc rgb "black" ps 0 pt 4 lw 3 lt 5 w xyerrorbars
+
+
+
+#Halo Mass vs. Stellar Mass v3
+reset
+set border  lw 3
+set terminal pdfcairo enhanced  dashed color font "Times-New-Roman,9" size 5 inches, 6 inches
+set output "plots/test-v7/seminario-II/Mass-StellarMass-v3.pdf"
+set multiplot
+set size 1,0.55
+set origin 0.0 , 0.0
+set tmargin 0.0
+set ytics -3,0.5,-0.5
+set key font "Times-New-Roman"
+set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+set style fill transparent solid 0.6 noborder
+plot [10.5:14][-3:0.0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) notitle lw 2 lc rgb "black" lt 1 w filledcurve\
+ ,  "analysis/test-v7/10909/milky-10909-diskoutflow-exp.dat" u (log10($2)):(log10(($3+$5)/$2)):(0.06) notitle ps 1 pt 4 lc rgb "#6600cc" w circ\
+ , "analysis/test-v7/2710/milky-2710-diskoutflow-exp.dat" u (log10($2)):(log10(($3+$5)/$2)):(0.06) notitle ps 1 pt 4 lc rgb "#009900" w circ\
+ , "analysis/test-v7/16953/milky-16953-diskoutflow-exp.dat" u (log10($2)):(log10(($3+$5)/$2)):(0.06) notitle ps 1 pt 4 lc rgb "#ffcc00" w circ\
+ , "reference/milky-way-v2.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) notitle lc rgb "black" ps 0 pt 4 lw 3 lt 1 w xyerrorbars\
+ , "reference/m-31.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) notitle lc rgb "black" ps 0  pt 4 lw 3  lt 5 w xyerrorbars
+set origin 0.0 , 0.55
+set key font "Times-New-Roman"
+unset xlabel
+set tmargin 2.5
+set bmargin 0.0 
+set size 1,0.5
+set xtics format ""
+set ytics -3,0.5,0
+set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+set style fill transparent solid 0.6 noborder
+plot [10.5:14][-3:0.0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+ ,  "analysis/test-v7/10909/m31-10909-diskoutflow-exp.dat" u (log10($2)):(log10(($3+$5)/$2)):(0.06) t "10909" ps 1 pt 4 lc rgb "#6600cc" w circ\
+ , "analysis/test-v7/2710/m31-2710-diskoutflow-exp.dat" u (log10($2)):(log10(($3+$5)/$2)):(0.06) t "2710" ps 1 pt 4 lc rgb "#009900" w circ\
+ , "analysis/test-v7/16953/m31-16953-diskoutflow-exp.dat" u (log10($2)):(log10(($3+$5)/$2)):(0.06) t "16953" ps 1 pt 4 lc rgb "#ffcc00" w circ\
+ , "reference/milky-way-v2.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "MW" lc rgb "black" ps 0 pt 4 lw 3 lt 1 w xyerrorbars\
+ , "reference/m-31.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "M31" lc rgb "black" ps 0 pt 4 lw 3  lt 5 w xyerrorbars
+unset multiplot
+
+
+
+
+##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass)
+reset
+set border  lw 3
+set terminal pdfcairo enhanced  color font "Times-New-Roman,9" size 5 inches,3 inches
+set output "plots/test-v7/seminario-II/StellarMass-GasFrac.pdf"
+set key font "Times-New-Roman"
+set ylabel "M_{/*0.75 Gas}/M_{ /*0.75 Total}"
+set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set style fill transparent solid 0.6 noborder
+plot [9:12][0:0.5]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) t "Bell et al. 2003"  ps 0.5 pt 1 lc rgb "gray"\
+, "analysis/test-v7/10909/milky-10909-diskoutflow-exp.dat" u (log10($3+$5)):(($4+$6)/($3 + $4 + $5 + $6)):(0.03) t "10909" ps 1 pt 4 lc rgb "#6600cc" w circ\
+, "analysis/test-v7/2710/milky-2710-diskoutflow-exp.dat" u  (log10($3+$5)):(($4+$6)/($3 + $4 + $5 + $6)):(0.03) t "2710" ps 1 pt 4 lc rgb "#009900" w circ\
+, "analysis/test-v7/16953/milky-16953-diskoutflow-exp.dat" u (log10($3+$5)):(($4+$6)/($3 + $4 + $5 + $6)):(0.03) t "16953" ps 1 pt 4 lc rgb "#ffcc00" w circ\
+, "reference/milky-way-v2.dat" u (log10($4)):($10/($4 + $10)):(log10($5)):(log10($6)):($10/($6 + $10)):($10/($5 + $10)) t "MW" lw 3 lc rgb "black"  ps 0 pt 4 w xyerrorbars
+
+
+
+##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass) v2
+reset
+set border  lw 3
+set terminal pdfcairo enhanced  color font "Times-New-Roman,9" size 5 inches,6 inches
+set output "plots/test-v7/seminario-II/StellarMass-GasFrac-v2.pdf"
+set multiplot
+set size 1,0.55
+set origin 0.0 , 0.0
+set tmargin 0.0
+set key font "Times-New-Roman"
+set ylabel "M_{/*0.75 Gas}/M_{ /*0.75 Total}"
+set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set style fill transparent solid 0.6 noborder
+plot [9:11.5][0:0.5]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) notitle  ps 0.5 pt 1 lc rgb "gray"\
+, "analysis/test-v7/10909/milky-10909-diskoutflow-exp.dat" u (log10($3+$5)):(($4+$6)/($3 + $4 + $5 + $6)):(0.03) notitle ps 1 pt 4 lc rgb "#6600cc" w circ\
+, "analysis/test-v7/2710/milky-2710-diskoutflow-exp.dat" u  (log10($3+$5)):(($4+$6)/($3 + $4 + $5 + $6)):(0.03) notitle ps 1 pt 4 lc rgb "#009900" w circ\
+, "analysis/test-v7/16953/milky-16953-diskoutflow-exp.dat" u (log10($3+$5)):(($4+$6)/($3 + $4 + $5 + $6)):(0.03) notitle ps 1 pt 4 lc rgb "#ffcc00" w circ\
+, "reference/milky-way-v2.dat" u (log10($4)):($10/($4 + $10)):(log10($5)):(log10($6)):($10/($6 + $10)):($10/($5 + $10)) notitle lw 3 lc rgb "black"  ps 0 pt 4 lt 1 w xyerrorbars\
+, "reference/m-31.dat" u (log10($4)):($10/($4 + $10)):(log10($5)):(log10($6)):($10/($6 + $10)):($10/($5 + $10)) notitle lw 3 lc rgb "black"  ps 0 pt 4 lt 5 w xyerrorbars
+set origin 0.0 , 0.55
+unset xlabel
+set tmargin 2.5
+set bmargin 0.0 
+set size 1,0.5
+set ytics 0.1,0.1
+set xtics format ""
+set ylabel "M_{/*0.75 Gas}/M_{ /*0.75 Total}"
+set style fill transparent solid 0.6 noborder
+plot [9:11.5][0:0.5]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) t "Bell et al. 2003"  ps 0.5 pt 1 lc rgb "gray"\
+, "analysis/test-v7/10909/m31-10909-diskoutflow-exp.dat" u (log10($3+$5)):(($4+$6)/($3 + $4 + $5 + $6)):(0.03) t "10909" ps 1 pt 4 lc rgb "#6600cc" w circ\
+, "analysis/test-v7/2710/m31-2710-diskoutflow-exp.dat" u  (log10($3+$5)):(($4+$6)/($3 + $4 + $5 + $6)):(0.03) t "2710" ps 1 pt 4 lc rgb "#009900" w circ\
+, "analysis/test-v7/16953/m31-16953-diskoutflow-exp.dat" u (log10($3+$5)):(($4+$6)/($3 + $4 + $5 + $6)):(0.03) t "16953" ps 1 pt 4 lc rgb "#ffcc00" w circ\
+, "reference/milky-way-v2.dat" u (log10($4)):($10/($4 + $10)):(log10($5)):(log10($6)):($10/($6 + $10)):($10/($5 + $10)) t "MW" lw 3 lc rgb "black"  ps 0 pt 4 lt 1 w xyerrorbars\
+, "reference/m-31.dat" u (log10($4)):($10/($4 + $10)):(log10($5)):(log10($6)):($10/($6 + $10)):($10/($5 + $10)) t "M31" lw 3 lc rgb "black"  ps 0 pt 4 lt 5 w xyerrorbars
+unset multiplot
+
+
+
+
+
+##Stellar Mass vs. Bulge  Mass/(Bulge Mass + Disk Mass)
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed color font "Times-New-Roman,9" size 5 inches,3 inches
+set key font "Times-New-Roman"
+set key left
+set output "plots/test-v7/seminario-II/TotMass-BulgeMassFrac.pdf"
+set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set style fill transparent solid 0.6 noborder
+plot [10:][0:1]  "analysis/test-v7/10909/milky-10909-diskoutflow-exp.dat" u (log10($3+$5)):($3/($3 + $4 + $5 + $6)):(0.015) t "10909" ps 2 pt 6 lc rgb "#6600cc" w circles\
+, "analysis/test-v7/2710/milky-2710-diskoutflow-exp.dat" u (log10($3+$5)):($3/($3 + $4 + $5 + $6)):(0.015) t "2710" ps 2 pt 6 lc rgb "#009900" w circles\
+, "analysis/test-v7/16953/milky-16953-diskoutflow-exp.dat" u (log10($3+$5)):($3/($3 + $4 + $5 + $6)):(0.015) t "16953" ps 2 pt 6 lc rgb "#ffcc00" w circles\
+, "reference/milky-way-v2.dat" u (log10($4)):($7/($4+$10)):(log10($5)):(log10($6)):($8/($6+$10)):($9/($5+$10)) t "MW" lt 1 lw 3 ps 0  pt 4 lc rgb "black" w xyerrorbars
+
+
+
+##Stellar Mass vs. Bulge  Mass/(Bulge Mass + Disk Mass) v2
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed color font "Times-New-Roman,9" size 5 inches,6 inches
+set output "plots/test-v7/seminario-II/TotMass-BulgeMassFrac-v2.pdf"
+set multiplot
+set size 1,0.55
+set origin 0.0 , 0.0
+set tmargin 0.0
+set key font "Times-New-Roman"
+set key left
+set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set style fill transparent solid 0.6 noborder
+plot [10:11.4][0:1]  "analysis/test-v7/10909/milky-10909-diskoutflow-exp.dat" u (log10($3+$5)):($3/($3 + $4 + $5 + $6)):(0.015) notitle ps 2 pt 6 lc rgb "#6600cc" w circles\
+, "analysis/test-v7/2710/milky-2710-diskoutflow-exp.dat" u (log10($3+$5)):($3/($3 + $4 + $5 + $6)):(0.015) notitle ps 2 pt 6 lc rgb "#009900" w circles\
+, "analysis/test-v7/16953/milky-16953-diskoutflow-exp.dat" u (log10($3+$5)):($3/($3 + $4 + $5 + $6)):(0.015) notitle ps 2 pt 6 lc rgb "#ffcc00" w circles\
+, "reference/milky-way-v2.dat" u (log10($4)):($7/($4+$10)):(log10($5)):(log10($6)):($8/($6+$10)):($9/($5+$10)) notitle lt 1 lw 3 ps 0  pt 4 lc rgb "black" w xyerrorbars\
+, "reference/m-31.dat" u  (log10($4)):($7/($4+$10)):(log10($5)):(log10($6)):($8/($6+$10)):($9/($5+$10)) notitle lt 5 lw 3 ps 0  pt 4 lc rgb "black" w xyerrorbars
+set origin 0.0 , 0.55
+unset xlabel
+set tmargin 2.5
+set bmargin 0.0 
+set size 1,0.5
+set ytics 0.2,0.2
+set xtics format ""
+set style fill transparent solid 0.6 noborder
+plot [10:11.4][0:1]  "analysis/test-v7/10909/m31-10909-diskoutflow-exp.dat" u (log10($3+$5)):($3/($3 + $4 + $5 + $6)):(0.015) t "10909" ps 2 pt 6 lc rgb "#6600cc" w circles\
+, "analysis/test-v7/2710/m31-2710-diskoutflow-exp.dat" u (log10($3+$5)):($3/($3 + $4 + $5 + $6)):(0.015) t "2710" ps 2 pt 6 lc rgb "#009900" w circles\
+, "analysis/test-v7/16953/m31-16953-diskoutflow-exp.dat" u (log10($3+$5)):($3/($3 + $4 + $5 + $6)):(0.015) t "16953" ps 2 pt 6 lc rgb "#ffcc00" w circles\
+, "reference/milky-way-v2.dat" u (log10($4)):($7/($4+$10)):(log10($5)):(log10($6)):($8/($6+$10)):($9/($5+$10)) t "MW" lt 1 lw 3 ps 0  pt 4 lc rgb "black" w xyerrorbars\
+, "reference/m-31.dat" u (log10($4)):($7/($4+$10)):(log10($5)):(log10($6)):($8/($6+$10)):($9/($5+$10)) t "M31" lt 5 lw 3 ps 0  pt 4 lc rgb "black" w xyerrorbars
+unset multiplot
+
+
+
+
+# ################################   PART 2 - RANGE MASS AROUND  MW ##########################################
+
+
+##Halo Mass vs. Stellar Mass 
+reset
+set border  lw 3
+set terminal pdfcairo enhanced  dashed color font "Times-New-Roman,9" size 5 inches,3 inches
+set output "plots/test-v7/seminario-II/MW-MassRange-Mass-StellarMass.pdf"
+set key font "Times-New-Roman"
+set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+set ylabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set style fill transparent solid 0.3 noborder
+plot [11:13][9:12]  "+" u 1:(log10(mc2($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc2($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "Moster B P et al. (2009)" lw 2 lc rgb "blue" lt 1 w filledcurve\
+ , "analysis/10909/Clues10909-MWMassRange-part2.dat" u (log10($2)):(log10(($3+$6))):(0.03) notitle ps 0.25 pt 1 lc rgb "gray" w p\
+ , "analysis/16953/Clues16953-MWMassRange-part2.dat" u (log10($2)):(log10(($3+$6))):(0.03) notitle ps 0.25 pt 1 lc rgb "gray" w p\
+ , "analysis/2710/Clues2710-MWMassRange-part2.dat" u (log10($2)):(log10(($3+$6))):(0.03) notitle ps 0.25 pt 1 lc rgb "gray" w p\
+ , "analysis/10909/Clues10909-MWMassRange-part1.dat" u (log10($2)):(log10(($3+$6))):(0.03) notitle ps 0.25 pt 1 lc rgb "gray" w p\
+ , "analysis/16953/Clues16953-MWMassRange-part1.dat" u (log10($2)):(log10(($3+$6))):(0.03) notitle ps 0.25 pt 1 lc rgb "gray" w p\
+ , "analysis/2710/Clues2710-MWMassRange-part1.dat" u (log10($2)):(log10(($3+$6))):(0.03) notitle ps 0.25 pt 1 lc rgb "gray" w p\
+ , "analysis/10909/Clues10909-MWMassRange-part3.dat" u (log10($2)):(log10(($3+$6))):(0.03) notitle ps 0.25 pt 1 lc rgb "gray" w p\
+ , "analysis/16953/Clues16953-MWMassRange-part3.dat" u (log10($2)):(log10(($3+$6))):(0.03) notitle ps 0.25 pt 1 lc rgb "gray" w p\
+ , "analysis/2710/Clues2710-MWMassRange-part3.dat" u (log10($2)):(log10(($3+$6))):(0.03) notitle ps 0.25 pt 1 lc rgb "gray" w p\
+ , "analysis/10909/milky-default-params.dat" u (log10($3)):(log10(($4+$7))):(0.06) t "10909" ps 0.7 pt 7 lc rgb "#6600cc" w p\
+ , "analysis/16953/milky-default-params.dat" u (log10($3)):(log10(($4+$7))):(0.06) t "16953" ps 0.7 pt 7 lc rgb "#ffcc00"  w p\
+ , "analysis/2710/milky-default-params.dat" u (log10($3)):(log10(($4+$7))):(0.06) t "2710" ps 0.7 pt 7 lc rgb "#009900" w p\
+ , "analysis/10909/m31-default-params.dat" u (log10($3)):(log10(($4+$7))):(0.06) notitle ps 0.7 pt 5 lc rgb "#6600cc" w p\
+ , "analysis/16953/m31-default-params.dat" u (log10($3)):(log10(($4+$7))):(0.06) notitle ps 0.7 pt 5 lc rgb "#ffcc00" w p\
+ , "analysis/2710/m31-default-params.dat" u (log10($3)):(log10(($4+$7))):(0.06) notitle ps 0.7 pt 5 lc rgb "#009900" w p\
+ , "reference/milky-way-v2.dat" u (log10($1)):(log10($4)):(log10($2)):(log10($3)):(log10($5)):(log10($6)) t "MW" lc rgb "black" ps 0 pt 4 lw 3  lt 1 w xyerrorbars\
+ , "reference/m-31.dat" u (log10($1)):(log10($4)):(log10($2)):(log10($3)):(log10($5)):(log10($6)) t "M31" lc rgb "black" ps 0 pt 4 lw 3  lt 5 w xyerrorbars
+
+
+
+##Halo Mass vs. Stellar Mass v2
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+set output "plots/test-v7/seminario-II/MW-MassRange-Mass-StellarMass-v2.pdf"
+set key font "Times-New-Roman"
+set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+set style fill transparent solid 0.6 noborder
+plot [10:15][-3.5:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+ , "analysis/10909/Clues10909-MWMassRange-part2.dat" u (log10($2)):(log10(($3+$6)/$2)):(0.015) notitle ps 0.25  pt 1 lc rgb "#6666ff" w circ fs transparent solid 0.3\
+ , "analysis/16953/Clues16953-MWMassRange-part2.dat" u (log10($2)):(log10(($3+$6)/$2)):(0.015) notitle ps 0.25  pt 1 lc rgb "#6666ff" w circ fs transparent solid 0.3\
+ , "analysis/2710/Clues2710-MWMassRange-part2.dat"   u (log10($2)):(log10(($3+$6)/$2)):(0.015) notitle ps 0.25  pt 1 lc rgb "#6666ff" w circ fs transparent solid 0.3\
+ , "analysis/10909/Clues10909-MWMassRange-part1.dat" u (log10($2)):(log10(($3+$6)/$2)):(0.015) notitle ps 0.25  pt 1 lc rgb "#6666ff" w circ fs transparent solid 0.3\
+ , "analysis/16953/Clues16953-MWMassRange-part1.dat" u (log10($2)):(log10(($3+$6)/$2)):(0.015) notitle ps 0.25  pt 1 lc rgb "#6666ff" w circ fs transparent solid 0.3\
+ , "analysis/2710/Clues2710-MWMassRange-part1.dat"   u (log10($2)):(log10(($3+$6)/$2)):(0.015) notitle ps 0.25  pt 1 lc rgb "#6666ff" w circ fs transparent solid 0.3\
+ , "analysis/10909/Clues10909-MWMassRange-part3.dat" u (log10($2)):(log10(($3+$6)/$2)):(0.015) notitle ps 0.25  pt 1 lc rgb "#6666ff" w circ fs transparent solid 0.3\
+ , "analysis/16953/Clues16953-MWMassRange-part3.dat" u (log10($2)):(log10(($3+$6)/$2)):(0.015) notitle ps 0.25  pt 1 lc rgb "#6666ff" w circ fs transparent solid 0.3\
+ , "analysis/2710/Clues2710-MWMassRange-part3.dat"   u (log10($2)):(log10(($3+$6)/$2)):(0.015) notitle ps 0.25  pt 1 lc rgb "#6666ff" w circ fs transparent solid 0.3\
+ , "analysis/10909/milky-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) t "10909" ps 0.7  pt 7 lc rgb "#6600cc" w p\
+ , "analysis/16953/milky-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) t "16953" ps 0.7 pt 7 lc rgb "#ffcc00" w p\
+ , "analysis/2710/milky-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) t "2710" ps 0.7  pt 7 lc rgb  "#009900" w  p\
+ , "analysis/10909/m31-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) notitle ps 0.7  pt 5 lc rgb "#6600cc" w p\
+ , "analysis/16953/m31-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) notitle ps 0.7  pt 5 lc rgb "#ffcc00" w p\
+ , "analysis/2710/m31-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) notitle ps 0.7 pt 5 lc rgb "#009900" w p\
+ , "reference/milky-way-v2.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "MW" lc rgb "black" ps 0  pt 4 lw 3 lt 1 w xyerrorbars\
+ , "reference/m-31.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "MW" lc rgb "black" ps 0  pt 4 lw 3 lt 1 w xyerrorbars
+
+
+
+##Halo Mass vs. Stellar Mass v3
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
+set output "plots/test-v7/seminario-II/MW-MassRange-Mass-StellarMass-v3.pdf"
+set key font "Times-New-Roman"
+set xlabel "log_{/*0.75 10}(M_{/*0.75 DM}[M_{\342\212\231}])"
+set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})"
+set style fill transparent solid 0.6 noborder
+plot [10.5:14][-3:0]  "+" u 1:(log10(mc3($1, 1.0059-0.0332, 0.5611-0.00065, 11.9347-0.0257, 0.0267-0.0006))):(log10(mc3($1, 1.0059+0.0332, 0.5611+0.00065, 11.9347+0.0257, 0.0267+0.0006))) t "Moster et al. (2009)" lw 2 lc rgb "black" lt 1 w filledcurve\
+ , "analysis/range-mass/MWMassRange-Statistics.dat" u 1:2:4 notitle lt 1 lc rgb "#9999ff" w filledcurves\
+ , "analysis/range-mass/MWMassRange-Statistics.dat" u 1:3 notitle lw 3 lt 1 lc rgb "#3333cc" w l\
+ , "analysis/10909/milky-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) t "10909" ps 0.7  pt 7 lc rgb "#6600cc" w p\
+ , "analysis/16953/milky-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) t "16953" ps 0.7 pt 7 lc rgb "#ffcc00" w p\
+ , "analysis/2710/milky-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) t "2710" ps 0.7  pt 7 lc rgb  "#009900" w  p\
+ , "analysis/10909/m31-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) notitle ps 0.7  pt 5 lc rgb "#6600cc" w p\
+ , "analysis/16953/m31-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) notitle ps 0.7  pt 5 lc rgb "#ffcc00" w p\
+ , "analysis/2710/m31-default-params.dat" u (log10($3)):(log10(($4+$7)/$3)) notitle ps 0.7 pt 5 lc rgb "#009900" w p\
+ , "reference/milky-way-v2.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "MW" lc rgb "black" ps 0  pt 4 lw 3 lt 1 w xyerrorbars\
+ , "reference/m-31.dat" u (log10($1)):(log10($4/$1)):(log10($2)):(log10($3)):(log10($5/$3)):(log10($6/$2)) t "M31" lc rgb "black" ps 0  pt 4 lw 3 lt 5 w xyerrorbars
+
+
+
+
+# #darkviolet "#9400d3"
+# #springgreen "#00ff7f"
+# #limegreen #32cd32
+# #naranja "#ff7f50" 
+# # cian "#00ffff"
+# #azul"#6495ed"
+# #light purple "#9966FF"
+# #morado"#9966FF"
+# #naranja"#ff7f50"
+# #azul "#6495ed"
+
+
+##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass)
+reset
+set border  lw 3
+set terminal pdfcairo enhanced  color font "Times-New-Roman,9"
+set key font "Times-New-Roman"
+set output "plots/test-v7/seminario-II/MW-MassRange-StellarMass-GasFrac.pdf"
+set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
+set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set style fill transparent solid 0.3 noborder
+plot [9.5:][-0.02:]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) t "Bell et al. 2003"  ps 0.5 pt 1 lc rgb "gray"\
+, "analysis/10909/Clues10909-MWMassRange-part1.dat" u (log10($3+$6)):(($4+$7)/($4 + $7 + $3 + $6)):(0.01) t "Range Mass" ps 0.5 pt 3 lc rgb "#6666ff" w circles\
+, "analysis/2710/Clues2710-MWMassRange-part1.dat" u  (log10($3+$6)):(($4+$7)/($4 + $7 + $3 + $6)):(0.01) notitle ps 0.5 pt 3 lc rgb "#6666ff" w circles\
+, "analysis/16953/Clues16953-MWMassRange-part1.dat" u (log10($3+$6)):(($4+$7)/($4 + $7 + $3 + $6)):(0.01) notitle ps 0.5 pt 3 lc rgb "#6666ff" w circles\
+, "analysis/10909/Clues10909-MWMassRange-part2.dat" u (log10($3+$6)):(($4+$7)/($4 + $7 + $3 + $6)):(0.01) notitle ps 0.5 pt 3 lc rgb "#6666ff" w circles\
+, "analysis/2710/Clues2710-MWMassRange-part2.dat" u  (log10($3+$6)):(($4+$7)/($4 + $7 + $3 + $6)):(0.01) notitle ps 0.5 pt 3 lc rgb "#6666ff" w circles\
+, "analysis/16953/Clues16953-MWMassRange-part2.dat" u (log10($3+$6)):(($4+$7)/($4 + $7 + $3 + $6)):(0.01) notitle ps 0.5 pt 3 lc rgb "#6666ff" w circles\
+, "analysis/10909/Clues10909-MWMassRange-part3.dat" u (log10($3+$6)):(($4+$7)/($4 + $7 + $3 + $6)):(0.01) notitle ps 0.5 pt 3 lc rgb "#6666ff" w circles\
+, "analysis/2710/Clues2710-MWMassRange-part3.dat" u  (log10($3+$6)):(($4+$7)/($4 + $7 + $3 + $6)):(0.01) notitle ps 0.5 pt 3 lc rgb "#6666ff" w circles\
+, "analysis/16953/Clues16953-MWMassRange-part3.dat" u (log10($3+$6)):(($4+$7)/($4 + $7 + $3 + $6)):(0.01) notitle ps 0.5 pt 3 lc rgb "#6666ff" w circles\
+, "analysis/10909/milky-default-params.dat" u (log10($4+$7)):(($5+$8)/($5 + $8 + $4 + $7)):(0.05) t "10909" ps 0.9 pt 7 lc rgb "#6600cc" w p\
+, "analysis/16953/milky-default-params.dat" u (log10($4+$7)):(($5+$8)/($5 + $8 + $4 + $7)):(0.05) t "16953" ps 0.9 pt 7 lc rgb "#ffcc00" w p\
+, "analysis/2710/milky-default-params.dat" u (log10($4+$7)):(($5+$8)/($5 + $8 + $4 + $7)):(0.06) t "2710" ps 0.9 pt 7 lc rgb "#009900" w p\
+, "analysis/10909/m31-default-params.dat" u (log10($4+$7)):(($5+$8)/($5 + $8 + $4 + $7)):(0.05) notitle ps 0.9 pt 5 lc rgb "#6600cc" w p\
+, "analysis/16953/m31-default-params.dat" u (log10($4+$7)):(($5+$8)/($5 + $8 + $4 + $7)):(0.05) notitle ps 0.9 pt 5 lc rgb "#ffcc00" w p\
+, "analysis/2710/m31-default-params.dat" u (log10($4+$7)):(($5+$8)/($5 + $8 + $4 + $7)):(0.06) notitle ps 0.9 pt 5 lc rgb "#009900" w p\
+, "reference/milky-way.dat" u (log10($2)):($8/($2 + $8)) t "MW" lc rgb "black" lw 3 pt 6 ps 0.9 w p\
+, "reference/m-31.dat" u (log10($2)):($8/($2 + $8)) t "M31" lc rgb "black" lw 3 pt 4 ps 0.9 w p
+
+
+
+##Stellar Mass vs. Bulge  Mass/(Bulge Mass + Disk Mass)
+reset
+set border  lw 3
+set terminal pdfcairo enhanced dashed color font "Times-New-Roman,9"
+set key font "Times-New-Roman"
+set output "plots/test-v7/seminario-II/MW-MassRange-TotMass-BulgeMassFrac.pdf"
+set ylabel "M_{/*0.75 Bulge}/M_{/*0.75 Total}"
+set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+set style fill transparent solid 0.25 noborder
+plot [10:][:1.05]  "analysis/10909/Clues10909-MWMassRange-part1.dat" u (log10($3+$6)):(($6)/($4 + $7 + $3 + $6)):(0.005) notitle ps 0.8 pt 1 lc rgb "#6666ff" w cir\
+, "analysis/2710/Clues2710-MWMassRange-part1.dat" u  (log10($3+$6)):(($6)/($4 + $7 + $3 + $6)):(0.005) notitle ps 0.8 pt 1 lc rgb "#6666ff" w circles\
+, "analysis/16953/Clues16953-MWMassRange-part1.dat" u (log10($3+$6)):(($6)/($4 + $7 + $3 + $6)):(0.005) notitle ps 0.8 pt 1 lc rgb "#6666ff" w circles\
+, "analysis/10909/Clues10909-MWMassRange-part2.dat" u (log10($3+$6)):(($6)/($4 + $7 + $3 + $6)):(0.005) notitle ps 0.8 pt 1 lc rgb "#6666ff" w cir\
+, "analysis/2710/Clues2710-MWMassRange-part2.dat" u  (log10($3+$6)):(($6)/($4 + $7 + $3 + $6)):(0.005) notitle ps 0.8 pt 1 lc rgb "#6666ff" w circles\
+, "analysis/16953/Clues16953-MWMassRange-part2.dat" u (log10($3+$6)):(($6)/($4 + $7 + $3 + $6)):(0.005) notitle ps 0.8 pt 1 lc rgb "#6666ff" w circles\
+, "analysis/10909/Clues10909-MWMassRange-part3.dat" u (log10($3+$6)):(($6)/($4 + $7 + $3 + $6)):(0.005) notitle ps 0.8 pt 1 lc rgb "#6666ff" w cir\
+, "analysis/2710/Clues2710-MWMassRange-part3.dat" u  (log10($3+$6)):(($6)/($4 + $7 + $3 + $6)):(0.005) notitle ps 0.8 pt 1 lc rgb "#6666ff" w circles\
+, "analysis/16953/Clues16953-MWMassRange-part3.dat" u (log10($3+$6)):(($6)/($4 + $7 + $3 + $6)):(0.005) notitle ps 0.8 pt 1 lc rgb "#6666ff" w circles\
+, "analysis/10909/milky-default-params.dat" u (log10($4+$7)):(($7)/($5 + $8 + $4 + $7)):(0.01) t "10909" ps 1 pt 7 lc rgb "#6600cc" w p\
+, "analysis/16953/milky-default-params.dat" u (log10($4+$7)):(($7)/($5 + $8 + $4 + $7)):(0.05) t "16953" ps 1 pt 7 lc rgb "#ffcc00" w p\
+, "analysis/2710/milky-default-params.dat" u (log10($4+$7)):(($7)/($5 + $8 + $4 + $7)):(0.06) t "2710" ps 1 pt 7 lc rgb "#009900" w p\
+, "analysis/10909/m31-default-params.dat" u (log10($4+$7)):(($7)/($5 + $8 + $4 + $7)):(0.01) notitle ps 1 pt 5 lc rgb "#6600cc" w p\
+, "analysis/16953/m31-default-params.dat" u (log10($4+$7)):(($7)/($5 + $8 + $4 + $7)):(0.05) notitle ps 1 pt 5 lc rgb "#ffcc00" w p\
+, "analysis/2710/m31-default-params.dat" u (log10($4+$7)):(($7)/($5 + $8 + $4 + $7)):(0.06) notitle ps 1 pt 5 lc rgb "#009900" w p\
+, "reference/milky-way-v2.dat" u (log10($4)):($7/($4+$10)):(log10($5)):(log10($6)):($8/($6+$10)):($9/($5+$10)) t "MW" lt 1 lw 3 ps 0  pt 4 lc rgb "black" w xyerrorbars\
+, "reference/m-31.dat" u (log10($4)):($7/($4+$10)):(log10($5)):(log10($6)):($8/($6+$10)):($9/($5+$10)) t "M31" lt 3 lw 3 ps 0  pt 4 lc rgb "black" w xyerrorbars
+
+
+
+# #Vel. Circular vs. Stellar Mass  
+# reset
+# set border  lw 3
+# set terminal pdfcairo enhanced dashed color  font "Times-New-Roman,9"
+# set key font "Times-New-Roman"
+# set output "plots/test-v7/seminario-II/MW-MassRange-Velocity-StellarMass.pdf"
+# set xlabel "V[km/s]"
+# set ylabel "log_{10}M_{\342\213\206}[M_{\342\212\231}]"
+# set style fill transparent solid 0.25 noborder
+# plot [90:300][9.5:] "reference/local_universe.dat" u 1:3 t "Courtois H M et al. (2011)"  ps 1 lc rgb  "gray" w p\
+# , "analysis/10909/Clues10909-MWMassRange-part1.dat" u ($5):( $3/$6 >2.0  ? log10($3+$6):1/0):(2.0) notitle ps 0.8 pt 1 lc rgb "#9966FF" w circles\
+# , "analysis/2710/Clues2710-MWMassRange-part1.dat"   u ($5):( $3/$6 >2.0  ? log10($3+$6):1/0):(2.0) notitle ps 0.8 pt 1 lc rgb "#9966FF" w circles\
+# , "analysis/16953/Clues16953-MWMassRange-part1.dat" u ($5):( $3/$6 >2.0  ? log10($3+$6):1/0):(2.0) notitle ps 0.8 pt 1 lc rgb "#9966FF" w circles\
+# , "analysis/10909/Clues10909-MWMassRange-part2.dat" u ($5):( $3/$6 >2.0  ? log10($3+$6):1/0):(2.0) notitle ps 0.8 pt 1 lc rgb "#9966FF" w circles\
+# , "analysis/2710/Clues2710-MWMassRange-part2.dat"   u ($5):( $3/$6 >2.0  ? log10($3+$6):1/0):(2.0) notitle ps 0.8 pt 1 lc rgb "#9966FF" w circles\
+# , "analysis/16953/Clues16953-MWMassRange-part2.dat" u ($5):( $3/$6 >2.0  ? log10($3+$6):1/0):(2.0) notitle ps 0.8 pt 1 lc rgb "#9966FF" w circles\
+# , "analysis/10909/Clues10909-MWMassRange-part3.dat" u ($5):( $3/$6 >2.0  ? log10($3+$6):1/0):(2.0) notitle ps 0.8 pt 1 lc rgb "#9966FF" w circles\
+# , "analysis/2710/Clues2710-MWMassRange-part3.dat"   u ($5):( $3/$6 >2.0  ? log10($3+$6):1/0):(2.0) notitle ps 0.8 pt 1 lc rgb "#9966FF" w circles\
+# , "analysis/16953/Clues16953-MWMassRange-part3.dat" u ($5):( $3/$6 >2.0  ? log10($3+$6):1/0):(2.0) notitle ps 0.8 pt 1 lc rgb "#9966FF" w circles\
+# , "analysis/10909/milky-default-params.dat"   u ($6):(log10($4+$7)) t "10909" ps 1 pt 7 lc rgb "#dc143c" w p\
+# , "analysis/16953/milky-default-params.dat"   u ($6):(log10($4+$7)) t "16953" ps 1 pt 7 lc rgb "#ff7f50" w p\
+# , "analysis/2710/milky-default-params.dat"    u ($6):(log10($4+$7)) t "2710" ps 1 pt 7 lc rgb "#6495ed" w p\
+# , "analysis/10909/m31-default-params.dat"   u ($6):(log10($4+$7)) notitle ps 1 pt 5 lc rgb "#dc143c" w p\
+# , "analysis/16953/m31-default-params.dat"   u ($6):(log10($4+$7)) notitle ps 1 pt 5 lc rgb "#ff7f50" w p\
+# , "analysis/2710/m31-default-params.dat"    u ($6):(log10($4+$7)) notitle ps 1 pt 5 lc rgb "#6495ed" w p\
+# , "reference/milky-way.dat" u ($6):(log10($2)) t "MW" ps 1 pt 6 lc rgb "black" w p
+
+
+
+############################Caracterization of parameters###############################################
+
+##Halo Mass vs. Stellar Mass v2
+reset
+set border  lw  3
+set terminal pdfcairo enhanced  color font "Times-New-Roman,9"
+set output "plots/test-v7/seminario-II/MW-M31-Mass-StellarMass-v2.pdf"
+set key font "Times-New-Roman"
+set key bottom left
+set ylabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})_{/*0.75 MW}"
+set xlabel "log_{/*0.75 10}(M_{\342\213\206}/M_{/*0.75 DM})_{/*0.75 M31}"
+set style fill transparent solid 0.5 noborder
+plot [:][:] "analysis/test-v7/10909/LG-10909-test-v7.dat" u ( log10(($9+$11)/$8) ):( log10(($3+$5)/$2) ):(0.05) t "10909"  ps 5 pt 6 lc rgb "#6600cc" w circles\
+, "analysis/test-v7/2710/LG-2710-test-v7.dat" u ( log10(($9+$11)/$8) ):( log10(($3+$5)/$2) ):(0.05) t "2710" ps 5 pt 6 lc rgb "#009900" w circles\
+, "analysis/test-v7/16953/LG-16953-test-v7.dat" u ( log10(($9+$11)/$8) ):( log10(($3+$5)/$2) ):(0.05) t "16953" ps 5 pt 6 lc rgb "#ffcc00" w circles\
+, "reference/MW-M31.dat" u (log10($14/$11)):(log10($4/$1)):(log10($14/$11 - DIV_ERROR($14,$15,$11,$12))):(log10($14/$11 + DIV_ERROR($14,$16,$11,$13))):(log10($4/$1 - DIV_ERROR($4,$5,$1,$2))):(log10($4/$1 + DIV_ERROR($4,$6,$1,$3))) t "LG" ps 0 lw 3 lc rgb "black" w xyerrorbars\
+, "reference/MW-M31.dat" u (log10($4/$1)):(log10($14/$11)):(log10($4/$1 - DIV_ERROR($4,$5,$1,$2))):(log10($4/$1 + DIV_ERROR($4,$6,$1,$3))):(log10($14/$11 - DIV_ERROR($14,$15,$11,$12))):(log10($14/$11 + DIV_ERROR($14,$16,$11,$13))) notitle ps 0 lw 3 lc rgb "black" w xyerrorbars
+
+
+
+
+
+##Stellar Mass vs. Mass Gass/(Gas + Stellar Mass)
+reset
+set border  lw 3
+set terminal pdfcairo enhanced  color font "Times-New-Roman,9"
+set key  font "Times-New-Roman"
+set output "plots/test-v7/seminario-II/MW-M31-StellarMass-GasFrac.pdf"
+set xlabel "[M_{/*0.75 Gas}/M_{/*0.75 Total}]_{/*0.75 M31}"
+set ylabel "[M_{/*0.75 Gas}/M_{/*0.75 Total}]_{/*0.75 MW}"
+set style fill transparent solid 0.5 noborder
+plot [:][:] "analysis/test-v7/10909/LG-10909-test-v7.dat" u (($10+$12)/($9 + $10 + $11 + $12)):(($4+$6)/($3 + $4 + $5 + $6)):(0.004) t "10909" ps 5 pt 6 lc rgb "#6600cc" w circles\
+, "analysis/test-v7/2710/LG-2710-test-v7.dat" u (($10+$12)/($9 + $10 + $11 + $12)):(($4+$6)/($3 + $4 + $5 + $6)):(0.004) t "2710"  ps 5 pt 6 lc rgb "#009900" w circles\
+, "analysis/test-v7/16953/LG-16953-test-v7.dat" u (($10+$12)/($9 + $10 + $11 + $12)):(($4+$6)/($3 + $4 + $5 + $6)):(0.004) t "16953"  ps 5 pt 6 lc rgb "#ffcc00" w circles\
+, "reference/MW-M31.dat" u ($20/($14+$20)):($10/($4 + $10)):($20/($14 + $20) - DIV_ERROR($20,0.0,$14+$20,$15)):($20/($14 + $20) + DIV_ERROR($20,0.0,$14+$20,$16)):($10/($4 + $10) - DIV_ERROR($10,0.0,$4+$10,$5)):($10/($4 + $10) + DIV_ERROR($10,0.0,$4+$10,$6)) t "LG" ps 0 lw 3 lc rgb "black"  pt 4 w xyerrorbars\
+, "reference/MW-M31.dat" u ($10/($4 + $10)):($20/($14+$20)):($10/($4 + $10) - DIV_ERROR($10,0.0,$4+$10,$5)):($10/($4 + $10) + DIV_ERROR($10,0.0,$4+$10,$6)):($20/($14 + $20) - DIV_ERROR($20,0.0,$14+$20,$15)):($20/($14 + $20) + DIV_ERROR($20,0.0,$14+$20,$16)) notitle ps 0 lw 3 lc rgb "black"  pt 4 w xyerrorbars
+
+
+
+
+
+##Stellar Mass vs. Bulge-Mass/(Bulge Mass + Disk Mass)
+reset
+set border  lw 3
+set terminal pdfcairo enhanced color font "Times-New-Roman,9"
+set key font "Times-New-Roman"
+set output "plots/test-v7/seminario-II/MW-M31-TotMass-BulgeMassFrac.pdf"
+set ylabel "[M_{/*0.75 Bulge}/M_{/*0.75 Total}]_{/*0.75 MW}"
+set xlabel "[M_{/*0.75 Bulge}/M_{/*0.75 Total}]_{/*0.75 M31}"
+set style fill transparent solid 0.5 noborder
+plot [:][:]  "analysis/test-v7/10909/LG-10909-test-v7.dat" u ($9/($9 + $10 + $11 + $12)):($3/($3 + $4 + $5 + $6)):(0.008) notitle ps 2 pt 6 lc rgb "#6600cc" w circles\
+, "analysis/test-v7/2710/LG-2710-test-v7.dat" u ($9/($9 + $10 + $11 + $12)):($3/($3 + $4 + $5 + $6)):(0.008) notitle ps 2 pt 6 lc rgb  "#009900" w circles\
+, "analysis/test-v7/16953/LG-16953-test-v7.dat" u ($9/($9 + $10 + $11 + $12)):($3/($3 + $4 + $5 + $6)):(0.008) notitle ps 2 pt 6 lc rgb "#ffcc00" w circles\
+, "reference/MW-M31.dat" u ($17/($14+$20)):($7/($4 + $10)) t "LG"  lw 3 lc rgb "black"  pt 4 w p\
+, "reference/MW-M31.dat" u ($7/($4 + $10)):($17/($14+$20)) notitle  lw 3 lc rgb "black"  pt 4 w p
+
+# :($17/($14 + $20) - DIV_ERROR($17,$18,$14+$20,$15)):($17/($14 + $20) + DIV_ERROR($17,$19,$14+$20,$16)):($7/($4 + $10) - DIV_ERROR($7,$8,$4+$10,$5)):($7/($4 + $10) + DIV_ERROR($7,$9,$4+$10,$6))
+# :($7/($4 + $10) - DIV_ERROR($7,$8,$4+$10,$5)):($7/($4 + $10) + DIV_ERROR($7,$9,$4+$10,$6)):($17/($14 + $20) - DIV_ERROR($17,$18,$14+$20,$15)):($17/($14 + $20) + DIV_ERROR($17,$19,$14+$20,$16))
+
+
+
