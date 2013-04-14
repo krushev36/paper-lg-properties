@@ -1,3 +1,4 @@
+#!/home/krushev/.local/bin/gnuplot
 #!/usr/bin/gnuplot
 
 
@@ -23,7 +24,7 @@ reset
 set border  lw 3.5
 set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,6"  size 7inch, 2.8inch
 set key font  "Times-New-Roman"
-set output "plots-v2/0.0.1-run-v1-13/run-v1-13-multiplot-gas-gfracscatter-quartils.pdf"
+set output "plots-v3/0.0.1-run-tot/run-v1-13-multiplot-gas-gfracscatter-quartils.pdf"
 set multiplot
 set size 0.37,1
 set origin 0.0, 0.0
@@ -88,7 +89,7 @@ reset
 set border  lw 3.5
 set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,6"  size 7inch, 2.8inch
 set key right bottom font "Times-New-Roman"
-set output "plots-v2/0.0.1-run-v1-13/run-v1-13-multiplot-bulge.pdf"
+set output "plots-v3/0.0.1-run-tot/run-v1-13-multiplot-bulge.pdf"
 set multiplot
 set size 0.37,1
 set origin 0.0, 0.0
@@ -144,7 +145,7 @@ reset
 set border  lw 3.5
 set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,6"  size 7inch, 2.8inch
 set key font "Times-New-Roman"
-set output "plots-v2/0.0.1-run-v1-13/run-v1-13-multiplot-star-frac.pdf"
+set output "plots-v3/0.0.1-run-tot/run-v1-13-multiplot-star-frac.pdf"
 set multiplot
 set size 0.37,1
 set origin 0.0, 0.0

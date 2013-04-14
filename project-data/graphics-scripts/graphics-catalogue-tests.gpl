@@ -1,4 +1,8 @@
-#!/usr/bin/gnuplot
+#!/home/krushev/.local/bin/gnuplot
+
+
+
+##!/usr/bin/gnuplot
 
 
 #beta=0.7817;      gamma=0.7334;      M1s=10**12.1988;      ms0_M0=0.0186
@@ -19,7 +23,7 @@ s(M) = 0.0059*M + 0.2632
 reset
 set border  lw 3
 set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
-set output "plots-v2/0.0.1-run-v1-13/T_F-disk-velmax.pdf"
+set output "plots-v3/0.0.1-run-tot/T_F-disk-velmax.pdf"
 set key font "Times-New-Roman"
 set ylabel "log_{/*0.75 10} V_{/*0.75 max}"
 set xlabel "i_{/*.75 (z=0.1)}"
@@ -29,14 +33,12 @@ plot [-24:-18][1.4:2.6]  "reference/SDSSTully-Fisher.dat" u 1:(log10($3)):($1+$2
  , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-tully-fisher2-stats-z0.1.dat" u 1:(log10($2)):(log10($4))  t "R3" lc rgb "#0000FF" lw 5 w filledcurve\
  , "analysis-v2/0.0.1-run-v1/tot/0.0.1-run-v1-tully-fisher2-stats-z0.1.dat" u 1:(log10($2)):(log10($4))  t "R1" lc rgb "#01DF01" lw 5 w filledcurve\
 
-#009900
-#ffcc00
-#6600cc
+
 
 reset
 set border  lw 3
 set terminal pdfcairo enhanced dashed  color font "Times-New-Roman,9"
-set output "plots-v2/0.0.1-run-v1-13/Color_Mag.pdf"
+set output "plots-v3/0.0.1-run-tot/Color_Mag.pdf"
 set key font "Times-New-Roman"
 set ylabel "g-r_{/*.75 (z=0.1)}"
 set xlabel "r_{/*.75 (z=0.1)}"
@@ -51,7 +53,13 @@ plot [-24:-17][-0.2:1.5] "+"  u 1:(Mean($1)+3.0*s($1)):(Mean($1)-3.0*s($1)) noti
 , Mean(x) notitle  lt 2 lw 3 lc rgb "black"  w l
 
 
+######################################################################################################################################################
 
+
+
+#009900
+#ffcc00
+#6600cc
 
 
 # ##Halo Mass vs. Stellar Mass v2

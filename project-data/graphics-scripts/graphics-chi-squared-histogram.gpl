@@ -1,5 +1,5 @@
-#!/usr/bin/gnuplot
-
+#!/home/krushev/.local/bin/gnuplot
+##!/usr/bin/gnuplot
 
 
 #################################################################################################################################################### 
@@ -7,7 +7,7 @@
 reset
 set border  lw 4
 set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,9" size 5in,5in
-set output "plots-v2/0.0.1-run-v1-13/run-v1-13-mw-chi-squared-no-halo-normal-histogram-v2.pdf"
+set output "plots-v3/0.0.1-run-tot/run-v1-13-mw-chi-squared-no-halo-normal-histogram-v2.pdf"
 set key font "Times-New-Roman"
 set ylabel "N_{*}(\360\235\233\277)"
 set xlabel "\360\235\233\277"
@@ -21,7 +21,7 @@ plot [0:1.5][]"./analysis-v2/0.0.1-run-v1/tot/mw-chi-squared-no-halo-histogram-v
 reset
 set border  lw 4
 set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,9" size 5in,5in
-set output "plots-v2/0.0.1-run-v1-13/run-v1-13-m31-chi-squared-no-halo-normal-histogram-v2.pdf"
+set output "plots-v3/0.0.1-run-tot/run-v1-13-m31-chi-squared-no-halo-normal-histogram-v2.pdf"
 set key font "Times-New-Roman"
 set ylabel "N_*(\360\235\233\277)"
 set xlabel "\360\235\233\277"
@@ -32,12 +32,10 @@ plot [0:1.5][]"./analysis-v2/0.0.1-run-v1/tot/m31-chi-squared-no-halo-histogram-
 
 
 
-
-
 reset
 set border  lw 4
 set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,7" size 5in,3in
-set output "plots-v2/0.0.1-run-v1-13/chi-squared-star-form-eff-v2.pdf"
+set output "plots-v3/0.0.1-run-tot/chi-squared-star-form-eff-v2.pdf"
 set key font "Times-New-Roman"
 set ylabel "N(\316\224\306\220)"
 set xlabel "{\317\265}_{/*.5 \342\230\205}"
@@ -57,7 +55,7 @@ plot [0.0:0.103][:]"analysis-v2/0.0.1-run-v1-10/MW/0.0.1-run-v1-10-mw-chi-square
 reset
 set border  lw 3
 set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,7"  size 5in,3in
-set output "plots-v2/0.0.1-run-v1-13/chi-squared-disk-outflow-exp-v2.pdf"
+set output "plots-v3/0.0.1-run-tot/chi-squared-disk-outflow-exp-v2.pdf"
 set key font "Times-New-Roman"
 set ylabel "N(\316\224\306\220)"
 set xlabel "{/Symbol a}_{/*.75 outflow}"
@@ -78,7 +76,7 @@ plot [1.35:3.5][:] "analysis-v2/0.0.1-run-v1-10/MW/0.0.1-run-v1-10-mw-chi-square
 reset
 set border  lw 3
 set terminal pdfcairo enhanced   dashed color font "Times-New-Roman,7"  size 5in,3in
-set output "plots-v2/0.0.1-run-v1-13/chi-squared-merger-ratio-v2.pdf"
+set output "plots-v3/0.0.1-run-tot/chi-squared-merger-ratio-v2.pdf"
 set key font "Times-New-Roman"
 set ylabel "N(\316\224\306\220)"
 set xtics ("Bulge" 0, "Disk"  1)

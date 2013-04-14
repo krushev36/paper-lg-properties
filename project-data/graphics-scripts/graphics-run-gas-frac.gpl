@@ -13,149 +13,8 @@ DIV_ERROR(x,dx,y,dy)=x*(dx/x+dy/y)/y
 Mean(M) = -0.0772557*M - 0.88334
 s(M) = 0.0059*M + 0.2632
 
-
-
-
 #################################################################################################################################################### 
 
-# # scatter in the stellar mass with 1-\sigma
-# ##Gas graction
-# reset
-# set border  lw 3.5
-# set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,6"  size 7inch, 2.8inch
-# set key font  "Times-New-Roman"
-# set output "plots-v2/0.0.1-run-v1-13/run-v1-13-multiplot-gas-starscatter-1sigma.pdf"
-# set multiplot
-# set size 0.37,1
-# set origin 0.0, 0.0
-# set rmargin 0
-# set ytics 0.0,0.1
-# set ytics format "%.1f"
-# set label 1 "{/1.5 \316\261}_{/*.75 disk,outf}" at 9.6, 0.65
-# set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
-# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
-# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
-# t "Bell et al. 2003a-b" ps 0.5 pt 1 lc rgb "gray"\
-# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:($5-sqrt($6)):($5+sqrt($6)) t "1{/Symbol s}" ps 0 lt 1 lc rgb "orange" w xerrorbar\
-# , "analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat"  u 1:3 t "1.5" lc rgb "#F78181" lt 1  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat"  u 1:3:2:4 every 10::1 notitle ps 0  lc rgb "#F78181" lt 1  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"  u 1:3 t "2.0" lc rgb "#FF0000" lt 2  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"  u 1:3:2:4 every 10::2 notitle ps 0 lc rgb "#FF0000" lt 2  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:3 t "2.5" lc rgb "#8A0808" lt 3  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:3:2:4 every 10::3 notitle ps 0 lc rgb "#8A0808" lt 3  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:3 t "3.0" lc rgb "#190707" lt 4  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:3:2:4 every 10::4 notitle ps 0 lc rgb "#190707" lt 4  lw 3 w yerrorbar
-# set size 0.3,1
-# set origin 0.37, 0.0
-# set lmargin 0
-# set ytics format ""
-# set xtics 10.0, 0.5, 12
-# set label 1 "{/1.5 \317\265}_{/*.75 disk,\342\230\205}" at 9.6, 0.65
-# unset ylabel
-# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
-# notitle ps 0.5 pt 1 lc rgb "gray"\
-# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:($5-sqrt($6)):($5+sqrt($6)) t "1{/Symbol s}" ps 0 lt 1 lc rgb "orange" w xerrorbar\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"    u 1:3 t "0.01"   lc rgb "#CECEF6"   lt 1  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"    u 1:3:2:4 every 10::1  notitle ps 0  lc rgb "#CECEF6"   lt 1  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3 t "0.02"   lc rgb "#5858FA"   lt 2  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3:2:4 every 10::2  notitle ps 0   lc rgb "#5858FA"   lt 2  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3 t "0.02"   lc rgb "#5858FA"   lt 2  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3:2:4 every 10::3  notitle ps 0   lc rgb "#5858FA"   lt 2  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-gas-frac-stats.dat"  u 1:3 t "0.035"  lc rgb "#0000FF"   lt 3  lw 3   w l\
-# , "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-gas-frac-stats.dat"  u 1:3:2:4 every 10::4  notitle ps 0  lc rgb "#0000FF"   lt 3  lw 3   w yerrorbar\
-# , "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat"    u 1:3 t "0.05"   lc rgb "#08088A"   lt 4  lw 3   w l\
-# , "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat"    u 1:3:2:4 every 10::5  notitle ps 0   lc rgb "#08088A"   lt 4  lw 3   w yerrorbar\
-# , "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-gas-frac-stats.dat"  u 1:3 t "0.075"  lc rgb "#0B0B3B"  lt 5  lw 3   w l\
-# , "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-gas-frac-stats.dat"  u 1:3:2:4 every 10::6  notitle ps 0  lc rgb "#0B0B3B"  lt 5  lw 3   w yerrorbar\
-# , "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-gas-frac-stats.dat"  u 1:3 t "0.1"    lc rgb "#070719"   lt 6  lw 3   w l\
-# , "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-gas-frac-stats.dat"  u 1:3:2:4 every 10::7  notitle ps 0    lc rgb "#070719"   lt 6  lw 3   w yerrorbar
-# set size 0.3,1
-# set origin 0.67, 0.0
-# set label 1 "{/1.5 \316\267}" at 9.6, 0.65
-# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
-# notitle ps 0.5 pt 1 lc rgb "gray"\
-# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:($5-sqrt($6)):($5+sqrt($6)) t "1{/Symbol s}" ps 0 lt 1 lc rgb "orange" w xerrorbar\
-# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-gas-frac-stats.dat" u 1:3 t "0.2" lc rgb "#A9F5A9" lt 1  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-gas-frac-stats.dat" u 1:3:2:4 every 10::1  notitle ps 0 lc rgb "#A9F5A9" lt 1  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"   u 1:3 t "0.3" lc rgb "#01DF01" lt 2  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"   u 1:3:2:4 every 10::2  notitle ps 0 lc rgb "#01DF01" lt 2  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v16/tot/0.0.1-run-v16-gas-frac-stats.dat" u 1:3 t "0.4" lc rgb "#0B3B0B" lt 3  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v16/tot/0.0.1-run-v16-gas-frac-stats.dat" u 1:3:2:4 every 10::3  notitle ps 0 lc rgb "#0B3B0B" lt 3  lw 3 w yerrorbar
-# unset multiplot
-
-
-# # scatter in the stellar mass between 1-3 quartils
-# ##Gas graction
-# reset
-# set border  lw 3.5
-# set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,6"  size 7inch, 2.8inch
-# set key font  "Times-New-Roman"
-# set output "plots-v2/0.0.1-run-v1-13/run-v1-13-multiplot-gas-starscatter-quartils.pdf"
-# set multiplot
-# set size 0.37,1
-# set origin 0.0, 0.0
-# set rmargin 0
-# set ytics 0.0,0.1
-# set ytics format "%.1f"
-# set label 1 "{/1.5 \316\261}_{/*.75 disk,outf}" at 9.6, 0.65
-# set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
-# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
-# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
-# t "Bell et al. 2003a-b" ps 0.5 pt 1 lc rgb "gray"\
-# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:2:4 t "1-3 Quartils" ps 0 lt 1 lc rgb "orange" w xerrorbar\
-# , "analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat"  u 1:3 t "1.5" lc rgb "#F78181" lt 1  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat"  u 1:3:2:4 every 10::1 notitle ps 0  lc rgb "#F78181" lt 1  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"  u 1:3 t "2.0" lc rgb "#FF0000" lt 2  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"  u 1:3:2:4 every 10::2 notitle ps 0 lc rgb "#FF0000" lt 2  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:3 t "2.5" lc rgb "#8A0808" lt 3  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:3:2:4 every 10::3 notitle ps 0 lc rgb "#8A0808" lt 3  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:3 t "3.0" lc rgb "#190707" lt 4  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:3:2:4 every 10::4 notitle ps 0 lc rgb "#190707" lt 4  lw 3 w yerrorbar
-# set size 0.3,1
-# set origin 0.37, 0.0
-# set lmargin 0
-# set ytics format ""
-# set xtics 10.0, 0.5, 12
-# set label 1 "{/1.5 \317\265}_{/*.75 disk,\342\230\205}" at 9.6, 0.65
-# unset ylabel
-# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
-# notitle ps 0.5 pt 1 lc rgb "gray"\
-# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:2:4 t "1-3 Quartils" ps 0 lt 1 lc rgb "orange" w xerrorbar\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"    u 1:3 t "0.01"   lc rgb "#CECEF6"   lt 1  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"    u 1:3:2:4 every 10::1  notitle ps 0  lc rgb "#CECEF6"   lt 1  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3 t "0.02"   lc rgb "#5858FA"   lt 2  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3:2:4 every 10::2  notitle ps 0   lc rgb "#5858FA"   lt 2  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3 t "0.02"   lc rgb "#5858FA"   lt 2  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3:2:4 every 10::3  notitle ps 0   lc rgb "#5858FA"   lt 2  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-gas-frac-stats.dat"  u 1:3 t "0.035"  lc rgb "#0000FF"   lt 3  lw 3   w l\
-# , "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-gas-frac-stats.dat"  u 1:3:2:4 every 10::4  notitle ps 0  lc rgb "#0000FF"   lt 3  lw 3   w yerrorbar\
-# , "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat"    u 1:3 t "0.05"   lc rgb "#08088A"   lt 4  lw 3   w l\
-# , "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat"    u 1:3:2:4 every 10::5  notitle ps 0   lc rgb "#08088A"   lt 4  lw 3   w yerrorbar\
-# , "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-gas-frac-stats.dat"  u 1:3 t "0.075"  lc rgb "#0B0B3B"  lt 5  lw 3   w l\
-# , "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-gas-frac-stats.dat"  u 1:3:2:4 every 10::6  notitle ps 0  lc rgb "#0B0B3B"  lt 5  lw 3   w yerrorbar\
-# , "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-gas-frac-stats.dat"  u 1:3 t "0.1"    lc rgb "#070719"   lt 6  lw 3   w l\
-# , "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-gas-frac-stats.dat"  u 1:3:2:4 every 10::7  notitle ps 0    lc rgb "#070719"   lt 6  lw 3   w yerrorbar
-# set size 0.3,1
-# set origin 0.67, 0.0
-# set label 1 "{/1.5 \316\267}" at 9.6, 0.65
-# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
-# notitle ps 0.5 pt 1 lc rgb "gray"\
-# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:2:4 t "1-3 Quartils" ps 0 lt 1 lc rgb "orange" w xerrorbar\
-# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-gas-frac-stats.dat" u 1:3 t "0.2" lc rgb "#A9F5A9" lt 1  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-gas-frac-stats.dat" u 1:3:2:4 every 10::1  notitle ps 0 lc rgb "#A9F5A9" lt 1  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"   u 1:3 t "0.3" lc rgb "#01DF01" lt 2  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"   u 1:3:2:4 every 10::2  notitle ps 0 lc rgb "#01DF01" lt 2  lw 3 w yerrorbar\
-# , "analysis-v2/0.0.1-run-v16/tot/0.0.1-run-v16-gas-frac-stats.dat" u 1:3 t "0.4" lc rgb "#0B3B0B" lt 3  lw 3 w l\
-# , "analysis-v2/0.0.1-run-v16/tot/0.0.1-run-v16-gas-frac-stats.dat" u 1:3:2:4 every 10::3  notitle ps 0 lc rgb "#0B3B0B" lt 3  lw 3 w yerrorbar
-# unset multiplot
-
-
-
-
-
-####################################################################################################
-####################################################################################################
-####################################################################################################
 # scatter in the gas fraction with 1-\sigma
 ##Gas graction
 reset
@@ -363,8 +222,146 @@ unset multiplot
 #plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$7)/(10**$5 + 10**$7 + 10**$3)>=0.05  ? (10**$5 + 10**$7)/(10**$5 + 10**$7 + 10**$3) : 1/0 ) \
 
 
+#################################################################################################################################################### 
+
+# # scatter in the stellar mass with 1-\sigma
+# ##Gas graction
+# reset
+# set border  lw 3.5
+# set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,6"  size 7inch, 2.8inch
+# set key font  "Times-New-Roman"
+# set output "plots-v2/0.0.1-run-v1-13/run-v1-13-multiplot-gas-starscatter-1sigma.pdf"
+# set multiplot
+# set size 0.37,1
+# set origin 0.0, 0.0
+# set rmargin 0
+# set ytics 0.0,0.1
+# set ytics format "%.1f"
+# set label 1 "{/1.5 \316\261}_{/*.75 disk,outf}" at 9.6, 0.65
+# set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
+# t "Bell et al. 2003a-b" ps 0.5 pt 1 lc rgb "gray"\
+# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:($5-sqrt($6)):($5+sqrt($6)) t "1{/Symbol s}" ps 0 lt 1 lc rgb "orange" w xerrorbar\
+# , "analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat"  u 1:3 t "1.5" lc rgb "#F78181" lt 1  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat"  u 1:3:2:4 every 10::1 notitle ps 0  lc rgb "#F78181" lt 1  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"  u 1:3 t "2.0" lc rgb "#FF0000" lt 2  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"  u 1:3:2:4 every 10::2 notitle ps 0 lc rgb "#FF0000" lt 2  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:3 t "2.5" lc rgb "#8A0808" lt 3  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:3:2:4 every 10::3 notitle ps 0 lc rgb "#8A0808" lt 3  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:3 t "3.0" lc rgb "#190707" lt 4  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:3:2:4 every 10::4 notitle ps 0 lc rgb "#190707" lt 4  lw 3 w yerrorbar
+# set size 0.3,1
+# set origin 0.37, 0.0
+# set lmargin 0
+# set ytics format ""
+# set xtics 10.0, 0.5, 12
+# set label 1 "{/1.5 \317\265}_{/*.75 disk,\342\230\205}" at 9.6, 0.65
+# unset ylabel
+# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
+# notitle ps 0.5 pt 1 lc rgb "gray"\
+# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:($5-sqrt($6)):($5+sqrt($6)) t "1{/Symbol s}" ps 0 lt 1 lc rgb "orange" w xerrorbar\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"    u 1:3 t "0.01"   lc rgb "#CECEF6"   lt 1  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"    u 1:3:2:4 every 10::1  notitle ps 0  lc rgb "#CECEF6"   lt 1  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3 t "0.02"   lc rgb "#5858FA"   lt 2  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3:2:4 every 10::2  notitle ps 0   lc rgb "#5858FA"   lt 2  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3 t "0.02"   lc rgb "#5858FA"   lt 2  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3:2:4 every 10::3  notitle ps 0   lc rgb "#5858FA"   lt 2  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-gas-frac-stats.dat"  u 1:3 t "0.035"  lc rgb "#0000FF"   lt 3  lw 3   w l\
+# , "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-gas-frac-stats.dat"  u 1:3:2:4 every 10::4  notitle ps 0  lc rgb "#0000FF"   lt 3  lw 3   w yerrorbar\
+# , "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat"    u 1:3 t "0.05"   lc rgb "#08088A"   lt 4  lw 3   w l\
+# , "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat"    u 1:3:2:4 every 10::5  notitle ps 0   lc rgb "#08088A"   lt 4  lw 3   w yerrorbar\
+# , "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-gas-frac-stats.dat"  u 1:3 t "0.075"  lc rgb "#0B0B3B"  lt 5  lw 3   w l\
+# , "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-gas-frac-stats.dat"  u 1:3:2:4 every 10::6  notitle ps 0  lc rgb "#0B0B3B"  lt 5  lw 3   w yerrorbar\
+# , "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-gas-frac-stats.dat"  u 1:3 t "0.1"    lc rgb "#070719"   lt 6  lw 3   w l\
+# , "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-gas-frac-stats.dat"  u 1:3:2:4 every 10::7  notitle ps 0    lc rgb "#070719"   lt 6  lw 3   w yerrorbar
+# set size 0.3,1
+# set origin 0.67, 0.0
+# set label 1 "{/1.5 \316\267}" at 9.6, 0.65
+# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
+# notitle ps 0.5 pt 1 lc rgb "gray"\
+# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:($5-sqrt($6)):($5+sqrt($6)) t "1{/Symbol s}" ps 0 lt 1 lc rgb "orange" w xerrorbar\
+# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-gas-frac-stats.dat" u 1:3 t "0.2" lc rgb "#A9F5A9" lt 1  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-gas-frac-stats.dat" u 1:3:2:4 every 10::1  notitle ps 0 lc rgb "#A9F5A9" lt 1  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"   u 1:3 t "0.3" lc rgb "#01DF01" lt 2  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"   u 1:3:2:4 every 10::2  notitle ps 0 lc rgb "#01DF01" lt 2  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v16/tot/0.0.1-run-v16-gas-frac-stats.dat" u 1:3 t "0.4" lc rgb "#0B3B0B" lt 3  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v16/tot/0.0.1-run-v16-gas-frac-stats.dat" u 1:3:2:4 every 10::3  notitle ps 0 lc rgb "#0B3B0B" lt 3  lw 3 w yerrorbar
+# unset multiplot
 
 
+# # scatter in the stellar mass between 1-3 quartils
+# ##Gas graction
+# reset
+# set border  lw 3.5
+# set terminal pdfcairo enhanced  color dashed font "Times-New-Roman,6"  size 7inch, 2.8inch
+# set key font  "Times-New-Roman"
+# set output "plots-v2/0.0.1-run-v1-13/run-v1-13-multiplot-gas-starscatter-quartils.pdf"
+# set multiplot
+# set size 0.37,1
+# set origin 0.0, 0.0
+# set rmargin 0
+# set ytics 0.0,0.1
+# set ytics format "%.1f"
+# set label 1 "{/1.5 \316\261}_{/*.75 disk,outf}" at 9.6, 0.65
+# set ylabel "M_{/*0.75 Gas}/M_{/*0.75 Total}"
+# set xlabel "log_{/*0.75 10}(M_{\342\213\206}[M_{\342\212\231}])"
+# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
+# t "Bell et al. 2003a-b" ps 0.5 pt 1 lc rgb "gray"\
+# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:2:4 t "1-3 Quartils" ps 0 lt 1 lc rgb "orange" w xerrorbar\
+# , "analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat"  u 1:3 t "1.5" lc rgb "#F78181" lt 1  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v7/tot/0.0.1-run-v7-gas-frac-stats.dat"  u 1:3:2:4 every 10::1 notitle ps 0  lc rgb "#F78181" lt 1  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"  u 1:3 t "2.0" lc rgb "#FF0000" lt 2  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"  u 1:3:2:4 every 10::2 notitle ps 0 lc rgb "#FF0000" lt 2  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:3 t "2.5" lc rgb "#8A0808" lt 3  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v8/tot/0.0.1-run-v8-gas-frac-stats.dat"  u 1:3:2:4 every 10::3 notitle ps 0 lc rgb "#8A0808" lt 3  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:3 t "3.0" lc rgb "#190707" lt 4  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v9/tot/0.0.1-run-v9-gas-frac-stats.dat"  u 1:3:2:4 every 10::4 notitle ps 0 lc rgb "#190707" lt 4  lw 3 w yerrorbar
+# set size 0.3,1
+# set origin 0.37, 0.0
+# set lmargin 0
+# set ytics format ""
+# set xtics 10.0, 0.5, 12
+# set label 1 "{/1.5 \317\265}_{/*.75 disk,\342\230\205}" at 9.6, 0.65
+# unset ylabel
+# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
+# notitle ps 0.5 pt 1 lc rgb "gray"\
+# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:2:4 t "1-3 Quartils" ps 0 lt 1 lc rgb "orange" w xerrorbar\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"    u 1:3 t "0.01"   lc rgb "#CECEF6"   lt 1  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"    u 1:3:2:4 every 10::1  notitle ps 0  lc rgb "#CECEF6"   lt 1  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3 t "0.02"   lc rgb "#5858FA"   lt 2  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3:2:4 every 10::2  notitle ps 0   lc rgb "#5858FA"   lt 2  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3 t "0.02"   lc rgb "#5858FA"   lt 2  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v5/tot/0.0.1-run-v5-gas-frac-stats.dat"    u 1:3:2:4 every 10::3  notitle ps 0   lc rgb "#5858FA"   lt 2  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-gas-frac-stats.dat"  u 1:3 t "0.035"  lc rgb "#0000FF"   lt 3  lw 3   w l\
+# , "analysis-v2/0.0.1-run-v11/tot/0.0.1-run-v11-gas-frac-stats.dat"  u 1:3:2:4 every 10::4  notitle ps 0  lc rgb "#0000FF"   lt 3  lw 3   w yerrorbar\
+# , "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat"    u 1:3 t "0.05"   lc rgb "#08088A"   lt 4  lw 3   w l\
+# , "analysis-v2/0.0.1-run-v6/tot/0.0.1-run-v6-gas-frac-stats.dat"    u 1:3:2:4 every 10::5  notitle ps 0   lc rgb "#08088A"   lt 4  lw 3   w yerrorbar\
+# , "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-gas-frac-stats.dat"  u 1:3 t "0.075"  lc rgb "#0B0B3B"  lt 5  lw 3   w l\
+# , "analysis-v2/0.0.1-run-v12/tot/0.0.1-run-v12-gas-frac-stats.dat"  u 1:3:2:4 every 10::6  notitle ps 0  lc rgb "#0B0B3B"  lt 5  lw 3   w yerrorbar\
+# , "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-gas-frac-stats.dat"  u 1:3 t "0.1"    lc rgb "#070719"   lt 6  lw 3   w l\
+# , "analysis-v2/0.0.1-run-v13/tot/0.0.1-run-v13-gas-frac-stats.dat"  u 1:3:2:4 every 10::7  notitle ps 0    lc rgb "#070719"   lt 6  lw 3   w yerrorbar
+# set size 0.3,1
+# set origin 0.67, 0.0
+# set label 1 "{/1.5 \316\267}" at 9.6, 0.65
+# plot [9.5:11.5][-0.02:0.7]  "reference/edr_masses.dat" u ($3):( (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3)>0.0001  ? (10**$5 + 10**$6)/(10**$5 + 10**$6 + 10**$3) : 1/0 ) \
+# notitle ps 0.5 pt 1 lc rgb "gray"\
+# , "reference/edr_masses_stats-bin-gfrac.dat" u 3:1:2:4 t "1-3 Quartils" ps 0 lt 1 lc rgb "orange" w xerrorbar\
+# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-gas-frac-stats.dat" u 1:3 t "0.2" lc rgb "#A9F5A9" lt 1  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v10/tot/0.0.1-run-v10-gas-frac-stats.dat" u 1:3:2:4 every 10::1  notitle ps 0 lc rgb "#A9F5A9" lt 1  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"   u 1:3 t "0.3" lc rgb "#01DF01" lt 2  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v4/tot/0.0.1-run-v4-gas-frac-stats.dat"   u 1:3:2:4 every 10::2  notitle ps 0 lc rgb "#01DF01" lt 2  lw 3 w yerrorbar\
+# , "analysis-v2/0.0.1-run-v16/tot/0.0.1-run-v16-gas-frac-stats.dat" u 1:3 t "0.4" lc rgb "#0B3B0B" lt 3  lw 3 w l\
+# , "analysis-v2/0.0.1-run-v16/tot/0.0.1-run-v16-gas-frac-stats.dat" u 1:3:2:4 every 10::3  notitle ps 0 lc rgb "#0B3B0B" lt 3  lw 3 w yerrorbar
+# unset multiplot
+
+
+
+
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
 
 
 
