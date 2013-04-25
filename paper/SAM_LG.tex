@@ -539,16 +539,17 @@ the best observational constraints come from the observations by
 \citep{Cram80} with the integrated mass of neutral gas corrected by
 \citep{Dame93}, yielding a value of $5.2\times 10^{9}$\Msun, there is
 a systematic observational uncertainty of $5\%$ originally quoted in
-\citep{Cram80}, but due to oppacity effects of the HI \citep{Braun92}  the total value of gas can increase by a $19\%$. Therefore we keep a value of $5.0-6.0\times 10^{9}$ for the mass of gas in the M31 disk and $6.0-8.0\times 10^{9}$\Msun for the Milky Way. 
+\citep{Cram80}, but due to oppacity effects of the HI \citep{Braun92} 
+the total value of gas can increase by a $19\%$. Therefore we keep a value of $5.0-6.0\times 10^{9}$ 
+for the mass of gas in the M31 disk and $6.0-8.0\times 10^{9}$\Msun for the Milky Way. 
 
 
 \section{The Method}
 \label{sec:method}
 
 
-
 \subsection{Parameter Space Exploration}
-\label{sec:method:numericals}
+\label{sec:method:paramspace}
 \begin{table*}\tiny
 \centering
 \resizebox{7in}{!} {
@@ -643,44 +644,32 @@ relations of the mock catalogues. This is decribed in the Appendix.
 
 \subsection{Searching LG-type Galaxies}
 \label{sec:method:finding-lg}
-Our investigation of the LG can be divided in two parts. The first is
-intended to study  for the  different models in Table \ref{tab:runs},
-the formation of MW  and M31-type galaxies; In the second one, we
-study how peculiar are the LG candidates provided from the CLUES
-simulations in terms of the similarity of their properties compared to
-the observed ones. 
+Our investigation of the LG can be divided in two parts. The first is intended to study  for the  different models in Table \ref{tab:runs}, the formation
+of MW  and M31-type galaxies; In the second one, we study how peculiar are the LG candidates provided from the CLUES simulations in terms of the similarity
+of their properties compared to the observed ones.
 
 
-To study the similarity between the observed and the mock galaxies,
-first, we define a galaxy as an object globally characterized through
-$M_{disk,\star}$   $M_{disk,gas}$    $M_{bulge,\star}$    $V_{circ}$ a
-stellar mass, bulge fraction  and a stellar-to-dark matter ratio. 
-
-To study the similarity between the observed and the simulated galaxy
-we make use of relative errors. Let an observed galaxy
-$\rho_{obs}(p_{obs,1}, \dots ,p_{obs,n})$ be characterized by an
-amount of $n$ observed properties $p_{obs,i}$, a simulated galaxy
-$R_{sim}(r_{sim,1}, \dots,r_{sim,n})$ characterized by the same amount
-of  estimated properties $r_{sim,i}$. The relative error between each
-observated property and the modelled is
-$\epsilon_i=|P_{obs,i}-R_{sim,i}|/|P_{obs,i}|$. Then,we would use the
-addition of all the relative errors of all the properties 
-
+To study the similarity between the observed and  mock galaxies is necessary to make some definitions, first, we call a galaxy as an object globally characterized 
+through a disc stellar mass $M_{\text{disc},\star}$,  disc gas mass $M_{\text{disc,gas}}$, bulge stellar mass $M_{\text{bulge},\star}$  and  $V_{\text{rot}}$; Then, to
+compare  observed galaxies and  the simulated ones, we pourly define a coordinate space $S$ where a point $P$ has four independ coordinates 
+$P(\delta p_1, \delta p_2,\delta p_3,\delta p_4)$.  We define each $\delta p_i$ as
 \begin{equation}
- \Delta \varepsilon = \epsilon_i+\dots+\epsilon_n.\label{eq:relative_error}
+\frac{p_{\text{obs},i}-p_{\text{sim},i}}{p_{\text{obs},i}},
 \end{equation}
+where $p_{\text{obs},i}$ and $p_{\text{sim},i}$ are the observed and simulated properties respectively. The properties used to calculate $\delta p_i$ are the above
+mentioned four properties to characterize a galaxy. The distance from the origin is given by
+\begin{equation}
+ P = \sqrt{\delta p^2_1 + \delta p^2_2 + \delta p^2_3 + \delta p^2_4}.\label{eq:relative_error}
+\end{equation}
+A point at the origin then corresponds to a perfect match between observation and simulation. For any simulated galaxy the lowest the distance the highest the 
+similarity to the observed.
 
-To study how much changes the abundance of LG-type galaxies for each
-of the performed models, we accounted the amount of galaxies $N(\Delta
-\varepsilon)$ similar to the MW and M31 under a ranges of calculated
-total relative error  $\Delta \varepsilon$ as defined in equation
-\ref{eq:relative_error}. We selected  three the lowest values of
-$\Delta \varepsilon$ (0.08, 0.16 and 0.24) and studyed its variations
-of $N(\Delta \varepsilon)$ as a function of the studyed parameters in
-order find lights about wether there is any set values for our
-selected set of parameter that $1)$ increases the abundace of disk
-galaxies $2)$increases the amount of MW and M31-type of galaxies. 
+
+Now, in order find lights about whether there is any set of values of our selected parameters (Section \ref{sec:method:paramspace}) that
+changes the amount of MW and M31-type of galaxies. we accounted the amount of galaxies $N( P)$ similar to the MW and M31 under a ranges 
+of the calculated distances  $P$, studyed its variations as a function of the parameters of interest (Section \ref{sec:method:paramspace}).
  
+
 \begin{table}
 \centering
 \begin{tabular}{|l|l|l|l|l|}
@@ -688,9 +677,9 @@ galaxies $2)$increases the amount of MW and M31-type of galaxies.
 \hline
  Property &  MW &  Ref. & M31 & Ref.\\
 \hline
-$M_{disk,\star}[10^{10}M_{\odot}]$ & $3.0 $ &  $(1)$ & $7.2$ & $(2)$ \\
-$M_{disk,gas}[10^{10}M_{\odot}]$ & $0.7$ &  $(3)$ & $0.6$ &  $(4)$ \\
-$M_{bulge,\star}[10^{10}M_{\odot}]$ & $1-2$ & $(3)$ & $3.2$ &  $(2)$ \\
+$M_{disk,\star}[10^{10}M_{\odot}]$ & $3.3-4.5 $ &  $(1)$ & $7-10$ & $(2)$ \\
+$M_{disk,gas}[10^{10}M_{\odot}]$ & $0.6-0.8$ &  $(3)$ & $0.5-0.6$ &  $(4)$ \\
+$M_{bulge,\star}[10^{10}M_{\odot}]$ & $0.5-1.2$ & $(3)$ & $1.9-3.3$ &  $(2)$ \\
 $V_{circ}[\text{Km/s}]$ & $238$ &  $(5)$ & $275\pm 5$ & $(6)$ \\
 %& $220$ & $(7)$ &   &  \\
 %$r_d[\text{Kpc}]$ & $2.38$ & $(5)$  & $5.48$ & $(3)$  \\
@@ -711,25 +700,23 @@ $V_{circ}[\text{Km/s}]$ & $238$ &  $(5)$ & $275\pm 5$ & $(6)$ \\
 We proceded to model semi-analyticaly the  pairs of LG candidates
 available from the three WMAP5 boxes of CLUES. 
 
-Two experiments were performed. Given the preliminar results of
-sections \ref{sec:method:numericals} and \ref{sec:method:finding-lg},
-we settled the space parameter of the two experiments to a WMAP5
-cosmology and $M_{\text{satel.,gas}}\to$ to the disk component of the
+Two experiments were performed. Where we settled the space parameter of the two experiments 
+to a WMAP5 cosmology and $M_{\text{satel.,gas}}\to$ to the disk component of the
 galaxy. 
 
 The first experiment was intended to recreate the experiment of the
 A-labeled models of Table \ref{tab:runs}, so, we simulated the LG halo
 candidates for different values of $\alpha_{\text{disk,outflow}}$
-ranging from 1.5  to 3.0 in steps of 0.075. For each of the values of
-$\alpha_{\text{disk,outflow}}$, we repeated the simulation 100 times
+ranging from 1.5 to 3.0 in steps of 0.075. For each of the values of
+$\alpha_{\text{disk,outflow}}$, we repeated the simulation over 100 times
 and calculated the medians of the properties of MW and M31; In the
 second experiment, we recreate the experiement of the E-labeled
 models.  We simulated the LG candidates through 20 different models of
 $\epsilon_{\text{disk},\star}$, starting from 0.005 in steps of 0.005
-to 0.1, repeated the simulation 100 times for each value of
+up to 0.1, repeated the simulation 100 times for each value of
 $\epsilon_{\text{disk},\star}$ and calculated the medians of the
 properties as well. Finally  it was also applied the same searching
-criterium of equation\ref{eq:relative_error} to look for similarities
+criteria of equation \ref{eq:relative_error} to look for similarities
 between the LG modeled pairs and the observed M31 and MW. 
 
 \section{Results and Discusion}
