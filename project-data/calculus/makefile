@@ -1,13 +1,14 @@
 CC = gcc
 
-PREFIX = /usr/include
+PREFIX = /usr/
 GSL_PATH = /home/krushev/.local/
-MY_PATH = /media/E/proyectos-v2/project-galacticus9.0-v1/calculus/rutines
+MY_PATH = /media/E/proyectos-v2/project-galacticus9.0-v1/calculus-v2/rutines
 
 CFLAGS = -Wall  -g  -I$(PREFIX) -I$(MY_PATH) -I$(GSL_PATH)/include -I. -c 
-LFLAGS = -L$(PREFIX)/lib -L$(GSL_PATH)/lib/lgsl -L$(GSL_PATH)/lgslcblas -lm
+LFLAGS = -L$(PREFIX)/lib -L$(GSL_PATH)/lib/  -lgsl   -lgslcblas -lm
 
-PROGRAMS = statistics-mw-type.out statistics-m31-type.out
+PROGRAMS = LG-params-medians-v2.out
+#statistics-mw-type.out statistics-m31-type.out
 #statistics-.out statistics-gas-ref.out statistics-gas.out
 #
 # LG-params-medians.out
