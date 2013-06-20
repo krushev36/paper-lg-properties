@@ -1,0 +1,105 @@
+\documentclass[usenatbib]{mn2e} 
+\usepackage{amsmath} 
+\usepackage{amssymb} 
+\usepackage{graphics}
+\usepackage{epsfig}  
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\ba{\begin{eqnarray}}
+\def\ea{\end{eqnarray}}
+
+% To highlight comments 
+\usepackage{color}
+\definecolor{red}{rgb}{1,0.0,0.0}
+\newcommand{\red}{\color{red}}
+
+\usepackage[normalem]{ulem}
+\definecolor{darkgreen}{rgb}{0.0,0.5,0.0}
+\newcommand{\SRK}[1]{\textcolor{darkgreen}{\bf SRK: \textit{#1}}}
+\newcommand{\SRKED}[1]{\textcolor{darkgreen}{\bf #1}}
+
+\newcommand{\LCDM}{$\Lambda$CDM~}
+\newcommand{\beq}{\begin{eqnarray}}  
+\newcommand{\eeq}{\end{eqnarray}}  
+\newcommand{\zz}{$z\sim 3$}  
+\newcommand{\apj}{ApJ}  
+\newcommand{\apjs}{ApJS}  
+\newcommand{\apjl}{ApJL}  
+\newcommand{\aj}{AJ}  
+\newcommand{\mnras}{MNRAS}  
+\newcommand{\mnrassub}{MNRAS accepted}  
+\newcommand{\aap}{A\&A}  
+\newcommand{\aaps}{A\&AS}  
+\newcommand{\araa}{ARA\&A}  
+\newcommand{\nat}{Nature}  
+\newcommand{\physrep}{PhR}
+\newcommand{\pasp}{PASP}    
+\newcommand{\pasj}{PASJ}    
+\newcommand{\avg}[1]{\langle{#1}\rangle}  
+\newcommand{\ly}{{\ifmmode{{\rm Ly}\alpha}\else{Ly$\alpha$}\fi}}
+\newcommand{\Mpc}{{\ifmmode{{\rm Mpc}}\else{Mpc }\fi}}  
+\newcommand{\hMpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}}  
+\newcommand{\hGpc}{{\ifmmode{h^{-1}{\rm Gpc}}\else{$h^{-1}$Gpc }\fi}}  
+\newcommand{\hmpc}{{\ifmmode{h^{-1}{\rm Mpc}}\else{$h^{-1}$Mpc }\fi}}  
+\newcommand{\hkpc}{{\ifmmode{h^{-1}{\rm kpc}}\else{$h^{-1}$kpc }\fi}}  
+\newcommand{\hMsun}{{\ifmmode{h^{-1}{\rm {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$}\fi}}  
+\newcommand{\hmsun}{{\ifmmode{h^{-1}{\rm {M_{\odot}}}}\else{$h^{-1}{\rm{M_{\odot}}}$}\fi}}  
+\newcommand{\Msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}}  
+\newcommand{\msun}{{\ifmmode{{\rm {M_{\odot}}}}\else{${\rm{M_{\odot}}}$}\fi}}  
+\newcommand{\lya}{{Lyman-$\alpha$ }}
+\newcommand{\clara}{{\texttt{CLARA}}~}
+\newcommand{\rand}{{\ifmmode{{\mathcal{R}}}\else{${\mathcal{R}}$ }\fi}}  
+\begin{document}
+
+\title[The baryonic LG in SAMs]{The baryonic properties of the Local Group: a semi-analytic perspective}
+\author[Sanes et al.]{
+\parbox[t]{\textwidth}{\raggedright 
+  Sergio Sanes \thanks{email}$^1$, 
+  Jaime E. Forero-Romero$^2$,
+  Yehuda Hoffman$^3$,\\
+  Stefan Gottl\"ober$^2$,
+  Juan C. Munoz-Cuartas$^2$,
+  Luis F. Quiroga-Pelaez$^1$,\\
+  Jorge I. Zuluaga$^1$,
+  Gustavo Yepes$^4$}
+\vspace*{6pt}\\
+$^1$Universidad de Antioquia\\
+$^2$Leibniz-Institut f\"ur Astrophysik Potsdam (AIP), An der Sternwarte 16, 14482 Potsdam, Germany\\ 
+$^3$Racah Institute of Physics, Hebrew University, Jerusalem 91904, 
+ Israel\\ 
+$^4$Grupo de Astrof\'{\i}sica, Universidad Aut\'onoma de Madrid,   Madrid
+E-28049, Spain\\
+}
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+\begin{keywords}
+galaxies: evolution - galaxies: formation -
+galaxies: high-redshift - methods: N-body simulations
+\end{keywords}
+
+\section{The observational prorperties of MW and M31}  
+\label{sec:discussion}  
+
+In this section we present the values for the parameters we have chosen to define the MW and M31: disk stellar mass, disk gaseous mass and bulge stellar mass.
+
+{\bf Disk stellar mass}. The principal approach to estimate the stellar mass in the disk of our galaxy is dynamical modelling. The work of \cite{Klypin2002} uses a parametric model that does not distinguish between the cold (gas) component and the stars, their results for galaxy models that allow for exchange of angular momentum locate the total baryonic mass of the disk between $5-6\times 10^{10}$\Msun for the MW and $7-9\times 10$\Msun for M31. Later \cite{Widrow2005} use N-body realizations of self-consisten, equilibrium distributions of the dark matter and stellar compoents to address the same problem. Their models with good match to the observational data have stellar masses of $3.3-4.5\times 10^{10}$\Msun for the Milky Way and $7-10\times 10^{10}$ for andromeda. \citep{Geehan2006} modeled the Andromeda strem using analytic bulge-disc-halo for M31, finding the best agreement for a disk mass of $8.4\times 10^{10}$\Msun. In this work we take $3.3-4.5\times 10^{10}$\Msun for the Milky Way and $7-10\times 10^{10}$ for M31.  
+
+{\bf Bulge stellar mass}. \cite{Klypin2002} constrain the MW bulge stellar masss $1-1.2\times 10^{10}$ \Msun while for M31 $1.9-2.4\times 10^{10}$, for the same galaxy \citep{Geehan2006} find a bulge mass of $3.3\times 10^{10}$\Msun. The MW analytical model of model \citep{Dehnen1998} finds a range of different values with average $\sim 0.5 10^{10}$\Msun. In this work we pick $0.5-1.2 \times 10^{10}$\Msun for the MW and $1.9-3.3\times 10^{10}$\Msun for M31.
+
+{\bf Disk Gaseous mass}. The abundance of gas in the Milky Way has been constrained through chemical evolution models. The set of observational constraints on these models most notably include the gas and star formation rate (SFR) profiles. The relevant observational data was compiled in \citep{Boissier99} using from the original work in \cite{Kulkarni87,Dame93}, with a values of $6.0-8.0 \times 10^{9}$\Msun, an update implementation of this chemical evolution model by \itep{Yin09} uses the same observations. In the case of M31 the best observational constraints come from the observations by \citep{Cram80} with the integrated mass of neutral gas corrected by \citep{Dame93}, yielding a value of $5.2\times 10^{9}$\Msun, there is a systematic observational uncertainty of $5\%$ originally quoted in \citep{Cram80}, but due to oppacity effects of the HI \citep{Braun92} the total value of gas can increase by a $19\%$. Therefore we keep a value of $5.0-6.0\times 10^{9}$ for the mass of gas in the M31 disk and $6.0-8.0\times 10^{9}$\Msun for the Milky Way. 
+
+
+
+\bibliographystyle{mn2e}
+\bibliography{references_obs} 
+
+
+
+\end{document}
+
+
+
+

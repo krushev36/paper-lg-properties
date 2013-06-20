@@ -1,0 +1,353 @@
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.2.5)  18 JUN 2013 12:04
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**SAM_LG_juank_NewData.tex
+(./SAM_LG_juank_NewData.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, lo
+aded.
+(./mn2e.cls
+Document Class: mn2e 2001/02/06 v2.2 LaTeX2e MN document class
+Document Style `MN' v2.2, released 2001 February 20
+\math@groups=\toks14
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/cmsy/b/n on input line 223.
+\symbmisymbols=\mathgroup4
+\symUPM=\mathgroup5
+LaTeX Font Info:    Overwriting symbol font `UPM' in version `bold'
+(Font)                  U/eur/m/n --> U/eur/b/n on input line 260.
+\symAMSa=\mathgroup6
+\SFB@measure=\dimen102
+\realparindent=\skip41
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\@indentskip=\skip42
+\smallindent=\skip43
+\@footindent=\skip44
+\@leftskip=\skip45
+\c@dummy=\count85
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip46
+\bibsep=\skip47
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count86
+)
+\c@table=\count87
+\c@figure=\count88
+\mathindent=\dimen103
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvips.def on input line 91.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+\epsfxsize=\dimen106
+\epsfysize=\dimen107
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip48
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks16
+\ex@=\dimen108
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen109
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count89
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count90
+\leftroot@=\count91
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count92
+\DOTSCASE@=\count93
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen110
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count94
+\c@MaxMatrixCols=\count95
+\dotsspace@=\muskip10
+\c@parentequation=\count96
+\dspbrk@lvl=\count97
+\tag@help=\toks17
+\row@=\count98
+\column@=\count99
+\maxfields@=\count100
+\andhelp@=\toks18
+\eqnshift@=\dimen111
+\alignsep@=\dimen112
+\tagshift@=\dimen113
+\tagwidth@=\dimen114
+\totwidth@=\dimen115
+\lineht@=\dimen116
+\@envbody=\toks19
+\multlinegap=\skip49
+\multlinetaggap=\skip50
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(./SAM_LG_juank_NewData.aux)
+\openout1 = `SAM_LG_juank_NewData.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 96.
+LaTeX Font Info:    ... okay on input line 96.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 96.
+LaTeX Font Info:    ... okay on input line 96.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 96.
+LaTeX Font Info:    ... okay on input line 96.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 96.
+LaTeX Font Info:    ... okay on input line 96.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 96.
+LaTeX Font Info:    ... okay on input line 96.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 96.
+LaTeX Font Info:    ... okay on input line 96.
+LaTeX Font Info:    Try loading font information for U+eur on input line 103.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueur.fd
+File: ueur.fd 2009/06/22 v3.00 Euler Roman
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 103.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 207.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 207.
+ [1
+
+
+] [2]
+
+Package natbib Warning: Citation `2001ApJ...555..393Z' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2006MNRAS.366..996G' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2009A&A...505..497Y' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2006A&A...453..459N' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2005MNRAS.364..433B' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2008MNRAS.389.1911S' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2001ApJ...555..393Z' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2006MNRAS.366..996G' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2009A&A...505..497Y' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2006A&A...453..459N' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2005MNRAS.364..433B' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `2008MNRAS.389.1911S' on page 3 undefined on i
+nput line 445.
+
+
+Package natbib Warning: Citation `Klypin2002' on page 3 undefined on input line
+ 452.
+
+
+Package natbib Warning: Citation `Widrow2005' on page 3 undefined on input line
+ 457.
+
+
+Package natbib Warning: Citation `Geehan2006' on page 3 undefined on input line
+ 462.
+
+
+Package natbib Warning: Citation `Klypin2002' on page 3 undefined on input line
+ 468.
+
+
+Package natbib Warning: Citation `Geehan2006' on page 3 undefined on input line
+ 470.
+
+
+Package natbib Warning: Citation `Dehnen1998' on page 3 undefined on input line
+ 472.
+
+
+Package natbib Warning: Citation `Boissier99' on page 3 undefined on input line
+ 480.
+
+
+Package natbib Warning: Citation `Kulkarni87' on page 3 undefined on input line
+ 481.
+
+
+Package natbib Warning: Citation `Dame93' on page 3 undefined on input line 481
+.
+
+
+Package natbib Warning: Citation `Yin09' on page 3 undefined on input line 483.
+
+
+
+Package natbib Warning: Citation `Cram80' on page 3 undefined on input line 484
+.
+
+
+Package natbib Warning: Citation `Dame93' on page 3 undefined on input line 485
+.
+
+
+Package natbib Warning: Citation `Cram80' on page 3 undefined on input line 488
+.
+
+
+Package natbib Warning: Citation `Braun92' on page 3 undefined on input line 48
+8.
+
+[3]
+File: figures/Pb_MW_definition.ps Graphic file (type eps)
+ <figures/Pb_MW_definition.ps>
+
+LaTeX Warning: Reference `sec:LGs' on page 4 undefined on input line 603.
+
+[4]
+File: figures/Multiplot_Pb_runalpha.ps Graphic file (type eps)
+ <figures/Multiplot_Pb_runalpha.ps>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: figures/Multiplot_Pb_runeps.ps Graphic file (type eps)
+
+<figures/Multiplot_Pb_runeps.ps> [5]
+Underfull \hbox (badness 10000) in paragraph at lines 836--838
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 839--843
+
+ []
+
+
+Underfull \vbox (badness 2326) has occurred while \output is active []
+
+ [6]
+Underfull \hbox (badness 10000) in paragraph at lines 844--846
+
+ []
+
+File: figures/multiplot_MW.ps Graphic file (type eps)
+<figures/multiplot_MW.ps>
+Overfull \hbox (12.9494pt too wide) in paragraph at lines 850--852
+[][] 
+ []
+
+File: figures/hist_GasFrac_MW.ps Graphic file (type eps)
+<figures/hist_GasFrac_MW.ps>
+File: figures/hist_GasFrac_M31.ps Graphic file (type eps)
+ <figures/hist_GasFrac_M31.ps> [7]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8]
+
+LaTeX Warning: Reference `tab:simulations' on page 9 undefined on input line 11
+07.
+
+
+Underfull \vbox (badness 3690) has occurred while \output is active []
+
+
+
+Package natbib Warning: Empty `thebibliography' environment on input line 1160.
+
+
+
+Package natbib Warning: There were undefined citations.
+
+[9] (./SAM_LG_juank_NewData.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 1881 strings out of 495060
+ 21565 string characters out of 3182054
+ 91374 words of memory out of 3000000
+ 5059 multiletter control sequences out of 15000+200000
+ 18097 words of font info for 64 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 31i,11n,34p,543b,296s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on SAM_LG_juank_NewData.dvi (9 pages, 64324 bytes).
